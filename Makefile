@@ -1,16 +1,24 @@
+
 CC=gcc
-CFLAGS=-Wall
+CFLAGS=-Wall -Werror -g
 ifdef N
 CPPFLAGS=-DN=$(N)
 endif
 SRCS=$(wildcard *.c)
 OBJS=$(SRCS:.c=.o)
-EXEC=main
+EXEC=appli
 
 all:$(EXEC)
 
 $(EXEC): $(OBJS)
 	$(CC) $(OBJS) -o $(EXEC)
 
+.PHONY:clean exec
 clean:
-	-rm $(OBJS)
+	-rm $(OBJS)	
+exec: clean
+	-rm	$(EXEC)
+
+
+
+	
