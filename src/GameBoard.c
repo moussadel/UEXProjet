@@ -1,4 +1,15 @@
-#include "GameBoard.h"
+//*****************************************************************************
+//
+//! \file GameBoaerd.c (rowNum).
+//! \brief This function (rowNum) calculates the point obtained after the shot.
+//!
+//! \param  Game board.
+//! \param  The variable that indicates the location.
+//!
+//! \return The point obtained after the shot. 
+//!
+//*****************************************************************************
+
 #include "appli.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -11,6 +22,21 @@ int rowNum(int num, char **board){
     }
     return i-1;
 }
+
+//*****************************************************************************
+//
+//! \file GameBoaerd.c (undoRedo).
+//! \brief This function (undoRedo) undo redo the player input. 
+//!
+//! \param The number that indicates whether to back up or restore.
+//! \param Game board.
+//! \param The number of the case that wants to cancel.
+//! \param The rew to be undo.
+//! \param The rew to be redo.
+//! \param The column to be undo. 
+//! \param The column to be redo.
+//!
+//*****************************************************************************
 
 void undoRedo(char *x, char **board, int num, int *undoCol,int *undoRow, int *k, int *l, int *z,
                int *redoCol, int *redoRow, int *q){
@@ -61,6 +87,17 @@ void undoRedo(char *x, char **board, int num, int *undoCol,int *undoRow, int *k,
         }
 }
 
+//*****************************************************************************
+//
+//! \file GameBoaerd.c (undoRedoLimit).
+//! \brief This function (undoRedoLimit) calculates  limite undo redo the player input. 
+//!
+//! \param The variable which indicates if one must undo redo.
+//! \param The variable that indicates the number of redo made.
+//! \param The variable that indicates the number of undo made.
+//!
+//*****************************************************************************
+
 void undoRedoLimit(int num, int *undoCounter, int *redoCounter){
     if(num == 0){
         *undoCounter += 1;
@@ -73,6 +110,16 @@ void undoRedoLimit(int num, int *undoCounter, int *redoCounter){
         *redoCounter = 0;
     }
 }
+
+//*****************************************************************************
+//
+//! \file GameBoaerd.c (saveLoad).
+//! \brief This function (saveLoad)save or restore the game.
+//!
+//! \param The variable that indicates whether to back up or restore.
+//! \param Game board.
+//!
+//*****************************************************************************
 
 void saveLoad(int *num, char **board){
     FILE *pfile;
@@ -109,6 +156,15 @@ void saveLoad(int *num, char **board){
         
     }
 }
+
+//*****************************************************************************
+//
+//! \file GameBoaerd.c (XMLformating).
+//! \briefh This function (XMLformating) read the size from XML file.
+//!
+//! \param The file that contains the size of the game table.
+//!
+//*****************************************************************************
 
 void XMLformating(FILE* file)
 {

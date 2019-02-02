@@ -1,23 +1,30 @@
-
 CC=gcc
-CFLAGS=-Wall -Werror -g
-ifdef N
-CPPFLAGS=-DN=$(N)
+CFLAGS=-Wall -Werror -g -IHeader
+ifdef L
+CPPFLAGS=-DL=$(L) 
 endif
-SRCS=$(wildcard *.c)
+ifdef C
+CPPFLAGS=-DC=$(C) 
+endif
+
+SRCS=$(wildcard src/*.c)
+
 OBJS=$(SRCS:.c=.o)
-EXEC=appli
+EXEC=bin/appli
+DOXYGENDIR = Doxygen
 
 all:$(EXEC)
+
+doxygen:
+	doxygen ./Doxyfile
 
 $(EXEC): $(OBJS)
 	$(CC) $(OBJS) -o $(EXEC)
 
-.PHONY:clean exec
+.PHONY:clean,doxygen
 clean:
-	-rm $(OBJS)	
-exec: clean
-	-rm	$(EXEC)
+	-rm -rf $(OBJS) $(EXEC) $(DOXYGENDIR)
+
 
 
 

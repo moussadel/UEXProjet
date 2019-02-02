@@ -1,5 +1,15 @@
-#include "Mode.h"
+
+//*****************************************************************************
+//
+//! \file Mode.c(print).
+//! \brief This function (print) displays the game board.
+//!
+//! \param Game board.
+//!
+//*****************************************************************************
+
 #include "appli.h"
+#include "Messages.h"
 
 void print(char **board)
 {
@@ -29,7 +39,23 @@ void print(char **board)
     printf("\n\n\n");
 }
 
-void mode_one(int *score1,int *score2,int num,int redoCounter,int undoCounter,int *undoCol,int *undoRow,int *redoCol,int *redoRow,int z,int q,char **board){
+//*****************************************************************************
+//
+//! \file Mode.c(ModeOne).
+//! \brief This function (ModeOne) hosts all the features for the player versus player mode.
+//!
+//! \param Game board.
+//! \param The row table for undo.
+//! \param The row table for redo.
+//! \param The column table for undo.
+//! \param The column table for redo.
+//! \param The first player's score
+//! \param The second player's score
+//!
+//*****************************************************************************
+
+void ModeOne(int *score1,int *score2,int num,int redoCounter,int undoCounter,int *undoCol,
+                int *undoRow, int *redoCol,int *redoRow,int z,int q,char **board){
 
     int k,l; 
     char x='X',o='O';
@@ -94,17 +120,11 @@ void mode_one(int *score1,int *score2,int num,int redoCounter,int undoCounter,in
         undoRedoLimit(num,&undoCounter,&redoCounter);
         undoRedo(&x,board,num,undoCol,undoRow,&k,&l,&z,redoCol,redoRow,&q);
         *score1=horizontalScore(board,x)+verticalScore(board,x)+diagonal(board,x)+diagonal1(board,x);
-        printf("\n***************************************************");
-        printf("\n***************************************************");
-        printf("\n**                      **                       **");
-        printf("\n** player1 score : %d    **   player2 score  : %d  **", *score1, *score2);
-        printf("\n**                      **                       **");
-        printf("\n***************************************************");
-        printf("\n***************************************************");
+        message(1,*score1, *score2,0);
     }
     if(numO(board) < numX(board)){
 
-         printf("\nplayer 2 enter number of the column:");
+        printf("\nplayer 2 enter number of the column:");
         scanf("%d", &num);
         saveLoad(&num, board);
         num = checknum(num,board);
@@ -161,18 +181,28 @@ void mode_one(int *score1,int *score2,int num,int redoCounter,int undoCounter,in
         undoRedoLimit(num,&undoCounter,&redoCounter);
         undoRedo(&o,board,num,undoCol,undoRow,&k,&l,&z,redoCol,redoRow,&q);
         *score2=horizontalScore(board,o)+verticalScore(board,o)+diagonal(board,o)+diagonal1(board,o);
-        printf("\n***************************************************");
-        printf("\n***************************************************");
-        printf("\n**                      **                       **");
-        printf("\n** player1 score : %d    **   player2 score  : %d  **", *score1, *score2);
-        printf("\n**                      **                       **");
-        printf("\n***************************************************");
-        printf("\n***************************************************");
+        message(2,*score1,*score2,0);
     }
 } 
 
-void mode_two(int *score1,int *score2,int choose,int high,int num,int redoCounter,int undoCounter,int *undoCol,int *undoRow,int *redoCol,int *redoRow,
-                int *compUndoCol,int *compUndoRow,int compUndoCounter,int z,int q,int c,int d,char **board){
+//*****************************************************************************
+//
+//! \file mode.c(ModeTwo).
+//! \brief This function (ModeTwo) hosts all the features for solo mode.
+//!
+//! \param Game board.
+//! \param The row table for undo.
+//! \param The row table for redo.
+//! \param The column table for undo.
+//! \param The column table for redo.
+//! \param The first player's score.
+//! \param The score of the second player.
+//!
+//*****************************************************************************
+
+void ModeTwo(int *score1,int *score2,int choose,int high,int num,int redoCounter,int undoCounter,
+                int *undoCol,int *undoRow,int *redoCol,int *redoRow,int *compUndoCol,int *compUndoRow,
+                int compUndoCounter,int z,int q,int c,int d,char **board){
 
     int k,l,flag; 
     char x='X',o='O';
@@ -208,14 +238,7 @@ void mode_two(int *score1,int *score2,int choose,int high,int num,int redoCounte
     undoRedoLimit(num,&undoCounter,&redoCounter);
     undoRedo(&x,board,num,undoCol,undoRow,&k,&l,&z,redoCol,redoRow,&q);
     *score1=horizontalScore(board,x)+verticalScore(board,x)+diagonal(board,x)+diagonal1(board,x);
-    printf("\n***************************************************");
-    printf("\n***************************************************");
-    printf("\n**                      **                       **");
-    printf("\n**   User  score : %d    **  Computer score  : %d  **", *score1, *score2);
-    printf("\n**                      **                       **");
-    printf("\n***************************************************");
-    printf("\n***************************************************");
-
+    message(3,*score1, *score2,0);
     switch(choose){
 
         case 1:{
@@ -282,112 +305,92 @@ void mode_two(int *score1,int *score2,int choose,int high,int num,int redoCounte
     } 
     print(board);
     *score2=horizontalScore(board,o)+verticalScore(board,o)+diagonal(board,o)+diagonal1(board,o);
-    printf("\n***************************************************");
-    printf("\n***************************************************");
-    printf("\n**                      **                       **");
-    printf("\n**   User  score : %d    **  Computer score  : %d  **", *score1, *score2);
-    printf("\n**                      **                       **");
-    printf("\n***************************************************");
-    printf("\n***************************************************");
+    message(4,*score1, *score2,0);
 }
 
+//*****************************************************************************
+//
+//! \file mode.c(DisplayMode).
+//! \brief The defferent mode game 
+//!
+//! \param Game board.
+//! \param The row table for undo.
+//! \param The row table for redo.
+//! \param The column table for undo.
+//! \param The column table for redo.
+//! \param The first player's score.
+//! \param The score of the second player.
+//! \param
+//! \param
+//!
+//*****************************************************************************
 
-void display_mode(int high,int score1,int score2,int *compUndoCol,int undoCounter,int redoCounter,
-					int compUndoCounter,int num, int *undoCol,int *undoRow,int *redoCol,
-					int *redoRow,int *compUndoRow, int q,int z,int d,int c, char **board){
+void DisplayMode(int high,int score1,int score2,int *compUndoCol,int undoCounter,int redoCounter,
+                    int compUndoCounter,int num, int *undoCol,int *undoRow,int *redoCol,
+                    int *redoRow,int *compUndoRow, int q,int z,int d,int c, char **board){
+    int choose;
+    message(0,0,0,0);
+    scanf("%d", &choose);
+    while((choose!=1 && choose!=2) || isalpha(choose))
+    {
+        printf("Enter 1 or 2\n");
+        printf("Player1 vs Player2: press 1 \n\nPlayer vs Computer: press 2 \n\n");
+        scanf("%d", &choose);
+    }
 
-	int choose;
-    printf("\n\n                     **** WELCOME TO THE GAME ****\n\n");
-            printf("Player1 vs Player2: press 1 \n\nPlayer vs Computer: press 2 \n\n");
+    if(choose == 1){
+        print(board);
+        do {
+            message(7,0,0,0);
+            if(numX(board) <= numO(board)){
+                ModeOne(&score1,&score2,num,redoCounter,undoCounter,undoCol,undoRow,redoCol,
+                            redoRow,z,q,board);
+            }
+
+            if(numO(board) < numX(board)){
+                ModeOne(&score1,&score2,num,redoCounter,undoCounter,undoCol,undoRow,redoCol,
+                          redoRow,z,q,board);
+            }           
+        }while(checkfull(board));
+        message(6,score1,score2,&high);
+    }
+    else{
+        printf("\nEasy (press 1), Medium (press 2), Hard (press 3)\n");
+        scanf("%d", &choose);
+
+        while(choose!=1 && choose!=2 && choose!=3){
+            printf("Enter 1 , 2 or 3\n");
+            printf("\nEasy (press 1), Medium (press 2), Hard (press 3)\n");
             scanf("%d", &choose);
+        }
+        print(board);
 
-            while((choose!=1 && choose!=2) || isalpha(choose))
-            {
-                printf("Enter 1 or 2\n");
-                printf("Player1 vs Player2: press 1 \n\nPlayer vs Computer: press 2 \n\n");
-                scanf("%d", &choose);
-            }
+        do{
+            message(7,0,0,0);
+            printf("\nenter number of the column:");
+            scanf("%d", &num);
+            saveLoad(&num, board);
+            num = checknum(num,board);
 
-            if(choose == 1){
-                print(board);
-                do {
-                    printf("\nif you want to undo, press 0\n");
-                    printf("if you want to redo, press -3, to load, press -1, to save, press -2\n");
-
-                    if(numX(board) <= numO(board)){
-                        mode_one(&score1,&score2,num,redoCounter,undoCounter,undoCol,undoRow,redoCol,redoRow,z,q,board);
-                    }
-
-                    if(numO(board) < numX(board)){
-                        mode_one(&score1,&score2,num,redoCounter,undoCounter,undoCol,undoRow,redoCol,redoRow,z,q,board);
-                    }           
-                }while(checkfull(board));
-            
-                if(score2>score1){
-                    high=score2;
-                    printf("\nPLAYER 2 WINS");
-                }
-                else if(score1==score2){
-                    high=score1;
-                    printf("\nDRAW");
-                }
-                else{
-                    high=score1;
-                    printf("\nPLAYER 1 WINS");
-                }
-            }
-            else{
-                printf("\nEasy (press 1), Medium (press 2), Hard (press 3)\n");
-                scanf("%d", &choose);
-
-                while(choose!=1 && choose!=2 && choose!=3){
-                    printf("Enter 1 , 2 or 3\n");
-                    printf("\nEasy (press 1), Medium (press 2), Hard (press 3)\n");
-                    scanf("%d", &choose);
-                }
-                print(board);
-
-                do{
-                    printf("\nif you want to undo, press 0\n");
-                    printf("if you want to redo, press -3, to load, press -1, to save, press -2\n");
-                    printf("\nenter number of the column:");
+            if(checkCol(num,board)){
+                while(board[0][num-1]!=blanc){
+                    print(board);
+                    printf("Invalid input. Do another move : ");
                     scanf("%d", &num);
                     saveLoad(&num, board);
-                    num = checknum(num,board);
-
-                    if(checkCol(num,board)){
-                        while(board[0][num-1]!=blanc){
-                            print(board);
-                            printf("Invalid input. Do another move : ");
-                            scanf("%d", &num);
-                            saveLoad(&num, board);
-                            if(num == 0 || num == -3){
-                                break;
-                            }
-                        }
+                    if(num == 0 || num == -3){
+                        break;
                     }
-
-                    if(redoCounter >= compUndoCounter){
-                        mode_two(&score1,&score2,choose,high,num,redoCounter,undoCounter,undoCol,undoRow,redoCol,redoRow,compUndoCol,compUndoRow,compUndoCounter,z,q,c,d,board);
-                    }
-
-                }while(checkfull(board));    
-                if(score2>score1){
-                    high=score2;
-                    printf("score1 :%i\n",score1 );
-                    printf("score2 :%i\n",score2 );
-                    printf("\nComputer WINS\n");
-                }
-                else if(score1==score2){
-                    high=score1;
-                    printf("\nDRAW\n");
-                }
-                else{
-                    high=score1;
-                    printf("\nUser WINS\n");
                 }
             }
-            highscore(high);
-            printf("\nif you you want to play again press y, else press any key\n");
-            
+
+            if(redoCounter >= compUndoCounter){
+                ModeTwo(&score1,&score2,choose,high,num,redoCounter,undoCounter,undoCol,undoRow,redoCol,
+                            redoRow,compUndoCol,compUndoRow,compUndoCounter,z,q,c,d,board);
+            }
+        }while(checkfull(board));    
+        message(5,score1,score2,&high);
+    }
+    highscore(high);
+    printf("\nif you  want to play again press y, else press any key\n");         
 }

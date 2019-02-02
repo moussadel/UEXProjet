@@ -1,4 +1,15 @@
-#include "Score.h"
+//*****************************************************************************
+//
+//! \file Score.c(horizontalScore).
+//! \brief  This function (horizontalScore) calculate the horizontal Score. 
+//!
+//! \param Game board.
+//! \param The character to be conted.
+//! 
+//! \return The horizontal Score.
+//!
+//*****************************************************************************
+
 #include "appli.h"
 
 int horizontalScore(char **board, char character){
@@ -16,6 +27,18 @@ int horizontalScore(char **board, char character){
     return score1;
 }
 
+//*****************************************************************************
+//
+//! \file Score.c(verticalScore).
+//! \brief This function (verticalScore) calculate the vertical Score.
+//!
+//! \param Game board.
+//! \param The character to be conted.
+//!
+//! \return The vertical Score.
+//!
+//*****************************************************************************
+
 int verticalScore(char **board, char character){
     int u, v;
     int score1=0;
@@ -31,13 +54,22 @@ int verticalScore(char **board, char character){
     return score1;
 }
 
+//*****************************************************************************
+//
+//! \file Score.c(highscore).
+//! \brief This function (highscore) calculate the high score and write the highscore in the file. 
+//!
+//! \param The high score.
+//!
+//*****************************************************************************
+
 void highscore(int high)
 {
     int i=0, n=0, temp;
     int *highs;
     FILE *highsc;
     highs = malloc(sizeof(int)*highscores);
-    highsc = fopen("highscores.text", "w+");
+    highsc = fopen("bin/highscores.text", "w+");
     fscanf(highsc, "%d", &highs[i]);
     do
     {
@@ -69,6 +101,18 @@ void highscore(int high)
     fclose(highsc);
 }
 
+//*****************************************************************************
+//
+//! \file Score.c(diagonal).
+//! \brief This function (diagonal) calculate the diagonal score.
+//!
+//! \param Game board.
+//! \param The character to be conted.
+//! 
+//! \return The diagona score.
+//!
+//*****************************************************************************
+
 int diagonal(char **board, char character){
     int u, v;
     int score1=0;
@@ -99,6 +143,17 @@ int diagonal1(char **board, char character){
     return score1;
 }
 
+//*****************************************************************************
+//
+//! \file Score.c(numX).
+//! \brief This function (numX) count the number of 'X' in the game table.
+//!
+//! \param Game board.
+//! 
+//! \return The number of 'X' in the game table.
+//!
+//*****************************************************************************
+
 int numX(char **board){
     int i, j, counter=0;
     for(i=height-1;i>=0;i--){
@@ -110,6 +165,17 @@ int numX(char **board){
     }
     return counter;
 }
+
+//*****************************************************************************
+//
+//! \file Score.c(numO).
+//! \brief This function (numO)count the number of 'O' in the game table.
+//!
+//! \param Game board.
+//! 
+//! \return The number of 'O' in the game table.
+//!
+//*****************************************************************************
 
 int numO(char **board){
     int i, j, counter=0;

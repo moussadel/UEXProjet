@@ -1,4 +1,14 @@
-#include "IAplayer.h"
+//*****************************************************************************
+//
+//! \file IAplayer.c(player).
+//! \brief This function (player) Write the character character in the case num. 
+//!
+//! \param Game board.
+//! \param Number of the case.
+//! \param The character to place in the game table.
+//!
+//*****************************************************************************
+
 #include "appli.h"
 
 void player(char **board, int num, char character)
@@ -14,6 +24,16 @@ void player(char **board, int num, char character)
     }
     print(board);
 }
+
+//*****************************************************************************
+//
+//! \file IAplayer.c(Easy)
+//! \brief This function (Easy) contains The level of easy play.
+//!
+//! \param Game board.
+//! \param Number  wich indecate the level of the IA.
+//!
+//*****************************************************************************
 
 void Easy(char **board, int *num)
 {
@@ -43,6 +63,16 @@ void Easy(char **board, int *num)
     }
     *num = l+1;
 }
+
+//*****************************************************************************
+//
+//! \file IAplayer.c (Medium).
+//! \brief This function (Medium) contains The level of Medium play.
+//!
+//! \param Board  game board.
+//! \param Number wich indecate the level of the IA.
+//!
+//*****************************************************************************
 
 int Medium(char **board, char character, int *num)
 {
@@ -139,6 +169,16 @@ int Medium(char **board, char character, int *num)
     }
     return 0;
 }
+
+//*****************************************************************************
+//
+//! \file IAplayer.c (Hard).
+//! \brief This function (Hard)contains The level of Hard play. 
+//!
+//! \param Game board.
+//! \param Number wich indecate the level of the IA.
+//!
+//*****************************************************************************
 
 void Hard(char **board, int *num)
 {

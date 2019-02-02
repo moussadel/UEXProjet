@@ -1,6 +1,18 @@
-#include "appli.h"
+//*****************************************************************************
+//
+//! \file appli.c(main)
+//! \brief The main program.
+//!  This function is the main program that allows you to allocate memory, 
+//!     initialize variables and start the game.
+//!
+//! \param argc the number of arguments to pass in parameter.
+//! \param argv * [] the name of the file containing the dimensions of the game table.
+//!
+//! \return the function termination code.      
+//!
+//*****************************************************************************
 
-//int width=0, height=0, highscores=0;
+#include "appli.h"
 
 int main(int argc,char* argv[])
 {
@@ -28,7 +40,7 @@ int main(int argc,char* argv[])
                          &redoRow, &compUndoCol, &compUndoRow, &board);
         initialisation(&undoCol, &redoCol, &undoRow,
                          &redoRow, &compUndoCol , &compUndoRow, &board);
-        display_mode(high,score1,score2,compUndoCol,undoCounter,redoCounter,compUndoCounter,
+        DisplayMode(high,score1,score2,compUndoCol,undoCounter,redoCounter,compUndoCounter,
                     num, undoCol,undoRow,redoCol,redoRow,compUndoRow,q,z,d,c,board);
         scanf("\n%c",&playAgain);
     }while(playAgain == 'y');

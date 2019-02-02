@@ -1,4 +1,18 @@
-#include "Initialisation.h"
+//*****************************************************************************
+//
+//! \file Initialisation.c(AllocationMemoire).
+//! \brief This function (AllocationMemoire) allocate memory for the game.
+//!
+//! \param Game board.
+//! \param The row table for undo.
+//! \param The row table for redo.
+//! \param The column table for undo.
+//! \param The column table for redo.
+//! \param
+//! \param        
+//!
+//*****************************************************************************
+
 #include "appli.h"
 
 void AllocationMemoire(int **undoCol,int **redoCol,int **undoRow,
@@ -47,6 +61,21 @@ void AllocationMemoire(int **undoCol,int **redoCol,int **undoRow,
         }
     }   
 }
+
+//*****************************************************************************
+//
+//! \file Initialisation.c(initialisation).
+//! \brief This function (initialisation) initializes the different boards for the game.
+//!
+//! \param Game board.
+//! \param The row table for undo.
+//! \param The row table for redo.
+//! \param The column table for undo.
+//! \param The column table for redo.
+//! \param
+//! \param        
+//!
+//*****************************************************************************
 
 void initialisation(int **undoCol,int **redoCol,int **undoRow,
                         int **redoRow,int **compUndoCol,int **compUndoRow,char ***board){
