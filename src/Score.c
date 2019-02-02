@@ -69,7 +69,7 @@ void highscore(int high)
     int *highs;
     FILE *highsc;
     highs = malloc(sizeof(int)*highscores);
-    highsc = fopen("bin/highscores.text", "w+");
+    highsc = fopen("highscores.text", "w+");
     fscanf(highsc, "%d", &highs[i]);
     do
     {
