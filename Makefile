@@ -1,5 +1,6 @@
 CC=gcc
-CFLAGS=-Wall -Werror -g -IHeader
+CFLAGS=-Wall -Werror -g -IHeader -IlibMessages/Header
+LDFLAGS=-L libMessages/lib -lmessages
 ifdef L
 CPPFLAGS=-DL=$(L) 
 endif
