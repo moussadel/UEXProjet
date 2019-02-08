@@ -1,0 +1,472 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - rap.info - src/Mode.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - Mode.c<span style="font-size: 80%;"> (source / <a href="Mode.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">rap.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">133</td>
+            <td class="headerCovTableEntry">208</td>
+            <td class="headerCovTableEntryLo">63.9 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-02-08 11:54:02</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : </a>
+<span class="lineNum">       2 </span>            : //*****************************************************************************
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : //! \file Mode.c(print).
+<span class="lineNum">       5 </span>            : //! \brief This function (print) displays the game board.
+<span class="lineNum">       6 </span>            : //!
+<span class="lineNum">       7 </span>            : //! \param Game board.
+<span class="lineNum">       8 </span>            : //!
+<span class="lineNum">       9 </span>            : //*****************************************************************************
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : #include &quot;appli.h&quot;
+<a name="12"><span class="lineNum">      12 </span>            : #include &quot;Messages.h&quot;</a>
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span><span class="lineCov">        286 : void print(char **board)</span>
+<span class="lineNum">      15 </span>            : {
+<span class="lineNum">      16 </span>            :     int i, j;
+<span class="lineNum">      17 </span><span class="lineCov">       2002 :     for(i=0; i&lt;height; i++)</span>
+<span class="lineNum">      18 </span>            :     {
+<span class="lineNum">      19 </span><span class="lineCov">       1716 :         printf(&quot;\n+&quot;);</span>
+<span class="lineNum">      20 </span><span class="lineCov">      13728 :         for(j=0; j&lt;width; j++)</span>
+<span class="lineNum">      21 </span>            :         {
+<span class="lineNum">      22 </span><span class="lineCov">      12012 :             printf(&quot;---+&quot;);</span>
+<span class="lineNum">      23 </span>            :         }
+<span class="lineNum">      24 </span><span class="lineCov">       1716 :         printf(&quot;\n|&quot;);</span>
+<span class="lineNum">      25 </span><span class="lineCov">      13728 :         for(j=0; j&lt;width; j++)</span>
+<span class="lineNum">      26 </span>            :         {
+<span class="lineNum">      27 </span><span class="lineCov">      12012 :             printf(&quot; %c |&quot;, board[i][j]);</span>
+<span class="lineNum">      28 </span>            :         }
+<span class="lineNum">      29 </span>            :     }
+<span class="lineNum">      30 </span><span class="lineCov">        286 :     printf(&quot;\n+&quot;);</span>
+<span class="lineNum">      31 </span><span class="lineCov">       2288 :     for(i=0; i&lt;width; i++)</span>
+<span class="lineNum">      32 </span>            :     {
+<span class="lineNum">      33 </span><span class="lineCov">       2002 :         printf(&quot;---+&quot;);</span>
+<span class="lineNum">      34 </span>            :     }
+<span class="lineNum">      35 </span><span class="lineCov">        286 :     printf(&quot;\n&quot;);</span>
+<span class="lineNum">      36 </span><span class="lineCov">       2288 :     for(i=1;i&lt;=width;i++){</span>
+<span class="lineNum">      37 </span><span class="lineCov">       2002 :         printf(&quot;   %d&quot;,i);</span>
+<span class="lineNum">      38 </span>            :     }
+<span class="lineNum">      39 </span><span class="lineCov">        286 :     printf(&quot;\n\n\n&quot;);</span>
+<span class="lineNum">      40 </span><span class="lineCov">        286 : }</span>
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span>            : //*****************************************************************************
+<span class="lineNum">      43 </span>            : //
+<span class="lineNum">      44 </span>            : //! \file Mode.c(ModeOne).
+<span class="lineNum">      45 </span>            : //! \brief This function (ModeOne) hosts all the features for the player versus player mode.
+<span class="lineNum">      46 </span>            : //!
+<span class="lineNum">      47 </span>            : //! \param Game board.
+<span class="lineNum">      48 </span>            : //! \param The row table for undo.
+<span class="lineNum">      49 </span>            : //! \param The row table for redo.
+<span class="lineNum">      50 </span>            : //! \param The column table for undo.
+<span class="lineNum">      51 </span>            : //! \param The column table for redo.
+<span class="lineNum">      52 </span>            : //! \param The first player's score
+<span class="lineNum">      53 </span>            : //! \param The second player's score
+<span class="lineNum">      54 </span>            : //!
+<a name="55"><span class="lineNum">      55 </span>            : //*****************************************************************************</a>
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span><span class="lineCov">         43 : void ModeOne(int *score1,int *score2,int num,int redoCounter,int undoCounter,int *undoCol,</span>
+<span class="lineNum">      58 </span>            :                 int *undoRow, int *redoCol,int *redoRow,int z,int q,char **board){
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span>            :     int k,l; 
+<span class="lineNum">      61 </span><span class="lineCov">         43 :     char x='X',o='O';</span>
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span><span class="lineCov">         43 :     if(numX(board) &lt;= numO(board)){</span>
+<span class="lineNum">      64 </span>            : 
+<span class="lineNum">      65 </span><span class="lineCov">         43 :         printf(&quot;\nplayer 1 enter number of the column:&quot;);</span>
+<span class="lineNum">      66 </span><span class="lineCov">         43 :         scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">      67 </span><span class="lineCov">         43 :         saveLoad(&amp;num, board);</span>
+<span class="lineNum">      68 </span><span class="lineCov">         43 :         num = checknum(num,board);</span>
+<span class="lineNum">      69 </span>            : 
+<span class="lineNum">      70 </span><span class="lineCov">         43 :         if(checkCol(num,board)){</span>
+<span class="lineNum">      71 </span>            : 
+<span class="lineNum">      72 </span><span class="lineCov">         33 :             while(board[0][num-1]!=blanc)</span>
+<span class="lineNum">      73 </span>            :             {
+<span class="lineNum">      74 </span><span class="lineCov">         15 :                 print(board);</span>
+<span class="lineNum">      75 </span><span class="lineCov">         15 :                 printf(&quot;Invalid input. Do another move : &quot;);</span>
+<span class="lineNum">      76 </span><span class="lineCov">         15 :                 scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">      77 </span><span class="lineCov">         15 :                 saveLoad(&amp;num, board);</span>
+<span class="lineNum">      78 </span><span class="lineCov">         15 :                 if(num == 0 || num == -3){</span>
+<span class="lineNum">      79 </span>            :                     break;
+<span class="lineNum">      80 </span>            :                 }
+<span class="lineNum">      81 </span>            :             }
+<span class="lineNum">      82 </span>            :         }
+<span class="lineNum">      83 </span>            : 
+<span class="lineNum">      84 </span><span class="lineCov">         43 :         if(redoCounter &gt;= undoCounter){</span>
+<span class="lineNum">      85 </span>            : 
+<span class="lineNum">      86 </span><span class="lineCov">         86 :             while(num == -3){</span>
+<span class="lineNum">      87 </span><span class="lineNoCov">          0 :                 print(board);</span>
+<span class="lineNum">      88 </span><span class="lineNoCov">          0 :                 printf(&quot;\ncannot redo!! play again&quot;);</span>
+<span class="lineNum">      89 </span><span class="lineNoCov">          0 :                 scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">      90 </span><span class="lineNoCov">          0 :                 saveLoad(&amp;num, board);</span>
+<span class="lineNum">      91 </span><span class="lineNoCov">          0 :                 if(num == 0){</span>
+<span class="lineNum">      92 </span><span class="lineNoCov">          0 :                     break;</span>
+<span class="lineNum">      93 </span>            :                 }
+<span class="lineNum">      94 </span>            :             }
+<span class="lineNum">      95 </span>            :         }
+<span class="lineNum">      96 </span>            : 
+<span class="lineNum">      97 </span><span class="lineCov">         86 :         while(num == 0 &amp;&amp; checkEmpty(board)){</span>
+<span class="lineNum">      98 </span><span class="lineNoCov">          0 :             print(board);</span>
+<span class="lineNum">      99 </span><span class="lineNoCov">          0 :             printf(&quot;\ncannot undo! play again&quot;);</span>
+<span class="lineNum">     100 </span><span class="lineNoCov">          0 :             scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">     101 </span><span class="lineNoCov">          0 :             saveLoad(&amp;num, board);</span>
+<span class="lineNum">     102 </span>            : 
+<span class="lineNum">     103 </span><span class="lineNoCov">          0 :             if(num == -3){</span>
+<span class="lineNum">     104 </span>            : 
+<span class="lineNum">     105 </span><span class="lineNoCov">          0 :                 if(redoCounter &gt;= undoCounter){</span>
+<span class="lineNum">     106 </span>            : 
+<span class="lineNum">     107 </span><span class="lineNoCov">          0 :                     while(num == -3){</span>
+<span class="lineNum">     108 </span><span class="lineNoCov">          0 :                         print(board);</span>
+<span class="lineNum">     109 </span><span class="lineNoCov">          0 :                         printf(&quot;\ncannot redo!! play again&quot;);</span>
+<span class="lineNum">     110 </span><span class="lineNoCov">          0 :                         scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">     111 </span>            : 
+<span class="lineNum">     112 </span><span class="lineNoCov">          0 :                         if(num == 0){</span>
+<span class="lineNum">     113 </span><span class="lineNoCov">          0 :                             break;</span>
+<span class="lineNum">     114 </span>            :                         }
+<span class="lineNum">     115 </span>            :                     }
+<span class="lineNum">     116 </span>            :                 }
+<span class="lineNum">     117 </span>            :             }
+<span class="lineNum">     118 </span>            :         }
+<span class="lineNum">     119 </span>            : 
+<span class="lineNum">     120 </span><span class="lineCov">         43 :         undoRedoLimit(num,&amp;undoCounter,&amp;redoCounter);</span>
+<span class="lineNum">     121 </span><span class="lineCov">         43 :         undoRedo(&amp;x,board,num,undoCol,undoRow,&amp;k,&amp;l,&amp;z,redoCol,redoRow,&amp;q);</span>
+<span class="lineNum">     122 </span><span class="lineCov">         43 :         *score1=horizontalScore(board,x)+verticalScore(board,x)+diagonal(board,x)+diagonal1(board,x);</span>
+<span class="lineNum">     123 </span><span class="lineCov">         43 :         message(1,*score1, *score2,0);</span>
+<span class="lineNum">     124 </span>            :     }
+<span class="lineNum">     125 </span><span class="lineCov">         43 :     if(numO(board) &lt; numX(board)){</span>
+<span class="lineNum">     126 </span>            : 
+<span class="lineNum">     127 </span><span class="lineCov">         43 :         printf(&quot;\nplayer 2 enter number of the column:&quot;);</span>
+<span class="lineNum">     128 </span><span class="lineCov">         43 :         scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">     129 </span><span class="lineCov">         43 :         saveLoad(&amp;num, board);</span>
+<span class="lineNum">     130 </span><span class="lineCov">         43 :         num = checknum(num,board);</span>
+<span class="lineNum">     131 </span><span class="lineCov">         43 :         if(checkCol(num,board)){</span>
+<span class="lineNum">     132 </span><span class="lineCov">         11 :             while(board[0][num-1]!=blanc){</span>
+<span class="lineNum">     133 </span><span class="lineCov">          5 :                 print(board);</span>
+<span class="lineNum">     134 </span><span class="lineCov">          5 :                 printf(&quot;Invalid input. Do another move : &quot;);</span>
+<span class="lineNum">     135 </span><span class="lineCov">          5 :                 scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">     136 </span><span class="lineCov">          5 :                 saveLoad(&amp;num, board);</span>
+<span class="lineNum">     137 </span>            : 
+<span class="lineNum">     138 </span><span class="lineCov">          5 :                 if(num == 0 || num == -3){</span>
+<span class="lineNum">     139 </span>            :                     break;
+<span class="lineNum">     140 </span>            :                 }
+<span class="lineNum">     141 </span>            :             }
+<span class="lineNum">     142 </span>            :         }
+<span class="lineNum">     143 </span>            : 
+<span class="lineNum">     144 </span><span class="lineCov">         43 :         if(redoCounter &gt;= undoCounter){</span>
+<span class="lineNum">     145 </span>            : 
+<span class="lineNum">     146 </span><span class="lineCov">         86 :             while(num == -3){</span>
+<span class="lineNum">     147 </span><span class="lineNoCov">          0 :                 print(board);</span>
+<span class="lineNum">     148 </span><span class="lineNoCov">          0 :                 printf(&quot;\ncannot redo!! play again&quot;);</span>
+<span class="lineNum">     149 </span><span class="lineNoCov">          0 :                 scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">     150 </span><span class="lineNoCov">          0 :                 saveLoad(&amp;num, board);</span>
+<span class="lineNum">     151 </span>            : 
+<span class="lineNum">     152 </span><span class="lineNoCov">          0 :                 if(num == 0){</span>
+<span class="lineNum">     153 </span><span class="lineNoCov">          0 :                     break;</span>
+<span class="lineNum">     154 </span>            :                 }
+<span class="lineNum">     155 </span>            :             }
+<span class="lineNum">     156 </span>            :         }
+<span class="lineNum">     157 </span>            : 
+<span class="lineNum">     158 </span><span class="lineCov">         86 :         while(num == 0 &amp;&amp; checkEmpty(board)){</span>
+<span class="lineNum">     159 </span><span class="lineNoCov">          0 :             print(board);</span>
+<span class="lineNum">     160 </span><span class="lineNoCov">          0 :             printf(&quot;\ncannot undo! play again&quot;);</span>
+<span class="lineNum">     161 </span><span class="lineNoCov">          0 :             scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">     162 </span><span class="lineNoCov">          0 :             saveLoad(&amp;num, board);</span>
+<span class="lineNum">     163 </span>            : 
+<span class="lineNum">     164 </span><span class="lineNoCov">          0 :             if(num == -3){</span>
+<span class="lineNum">     165 </span>            : 
+<span class="lineNum">     166 </span><span class="lineNoCov">          0 :                 if(redoCounter &gt;= undoCounter){</span>
+<span class="lineNum">     167 </span>            : 
+<span class="lineNum">     168 </span><span class="lineNoCov">          0 :                     while(num == -3){</span>
+<span class="lineNum">     169 </span><span class="lineNoCov">          0 :                         print(board);</span>
+<span class="lineNum">     170 </span><span class="lineNoCov">          0 :                         printf(&quot;\ncannot redo!! play again&quot;);</span>
+<span class="lineNum">     171 </span><span class="lineNoCov">          0 :                         scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">     172 </span><span class="lineNoCov">          0 :                         saveLoad(&amp;num, board);</span>
+<span class="lineNum">     173 </span>            : 
+<span class="lineNum">     174 </span><span class="lineNoCov">          0 :                         if(num == 0){</span>
+<span class="lineNum">     175 </span><span class="lineNoCov">          0 :                             break;</span>
+<span class="lineNum">     176 </span>            :                         }
+<span class="lineNum">     177 </span>            :                     }
+<span class="lineNum">     178 </span>            :                 }
+<span class="lineNum">     179 </span>            :             }
+<span class="lineNum">     180 </span>            :         }
+<span class="lineNum">     181 </span><span class="lineCov">         43 :         undoRedoLimit(num,&amp;undoCounter,&amp;redoCounter);</span>
+<span class="lineNum">     182 </span><span class="lineCov">         43 :         undoRedo(&amp;o,board,num,undoCol,undoRow,&amp;k,&amp;l,&amp;z,redoCol,redoRow,&amp;q);</span>
+<span class="lineNum">     183 </span><span class="lineCov">         43 :         *score2=horizontalScore(board,o)+verticalScore(board,o)+diagonal(board,o)+diagonal1(board,o);</span>
+<span class="lineNum">     184 </span><span class="lineCov">         43 :         message(2,*score1,*score2,0);</span>
+<span class="lineNum">     185 </span>            :     }
+<span class="lineNum">     186 </span><span class="lineCov">         43 : } </span>
+<span class="lineNum">     187 </span>            : 
+<span class="lineNum">     188 </span>            : //*****************************************************************************
+<span class="lineNum">     189 </span>            : //
+<span class="lineNum">     190 </span>            : //! \file mode.c(ModeTwo).
+<span class="lineNum">     191 </span>            : //! \brief This function (ModeTwo) hosts all the features for solo mode.
+<span class="lineNum">     192 </span>            : //!
+<span class="lineNum">     193 </span>            : //! \param Game board.
+<span class="lineNum">     194 </span>            : //! \param The row table for undo.
+<span class="lineNum">     195 </span>            : //! \param The row table for redo.
+<span class="lineNum">     196 </span>            : //! \param The column table for undo.
+<span class="lineNum">     197 </span>            : //! \param The column table for redo.
+<span class="lineNum">     198 </span>            : //! \param The first player's score.
+<span class="lineNum">     199 </span>            : //! \param The score of the second player.
+<span class="lineNum">     200 </span>            : //!
+<a name="201"><span class="lineNum">     201 </span>            : //*****************************************************************************</a>
+<span class="lineNum">     202 </span>            : 
+<span class="lineNum">     203 </span><span class="lineCov">         84 : void ModeTwo(int *score1,int *score2,int choose,int high,int num,int redoCounter,int undoCounter,</span>
+<span class="lineNum">     204 </span>            :                 int *undoCol,int *undoRow,int *redoCol,int *redoRow,int *compUndoCol,int *compUndoRow,
+<span class="lineNum">     205 </span>            :                 int compUndoCounter,int z,int q,int c,int d,char **board){
+<span class="lineNum">     206 </span>            : 
+<span class="lineNum">     207 </span>            :     int k,l,flag; 
+<span class="lineNum">     208 </span><span class="lineCov">         84 :     char x='X',o='O';</span>
+<span class="lineNum">     209 </span>            : 
+<span class="lineNum">     210 </span><span class="lineCov">        168 :     while(num == -3){</span>
+<span class="lineNum">     211 </span><span class="lineNoCov">          0 :         print(board);</span>
+<span class="lineNum">     212 </span><span class="lineNoCov">          0 :         printf(&quot;\ncannot redo!! play again&quot;);</span>
+<span class="lineNum">     213 </span><span class="lineNoCov">          0 :         scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">     214 </span><span class="lineNoCov">          0 :         saveLoad(&amp;num, board);</span>
+<span class="lineNum">     215 </span><span class="lineNoCov">          0 :         if(num == 0){</span>
+<span class="lineNum">     216 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     217 </span>            :         }
+<span class="lineNum">     218 </span>            :     }                
+<span class="lineNum">     219 </span><span class="lineCov">        168 :     while(num == 0 &amp;&amp; checkEmpty(board)){</span>
+<span class="lineNum">     220 </span><span class="lineNoCov">          0 :         print(board);</span>
+<span class="lineNum">     221 </span><span class="lineNoCov">          0 :         printf(&quot;\ncannot undo! play again&quot;);</span>
+<span class="lineNum">     222 </span><span class="lineNoCov">          0 :         scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">     223 </span><span class="lineNoCov">          0 :         saveLoad(&amp;num, board);</span>
+<span class="lineNum">     224 </span><span class="lineNoCov">          0 :         if(num == -3){</span>
+<span class="lineNum">     225 </span><span class="lineNoCov">          0 :             if(redoCounter &gt;= compUndoCounter){</span>
+<span class="lineNum">     226 </span><span class="lineNoCov">          0 :                 while(num == -3){</span>
+<span class="lineNum">     227 </span><span class="lineNoCov">          0 :                     print(board);</span>
+<span class="lineNum">     228 </span><span class="lineNoCov">          0 :                     printf(&quot;\ncannot redo!! play again&quot;);</span>
+<span class="lineNum">     229 </span><span class="lineNoCov">          0 :                     scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">     230 </span><span class="lineNoCov">          0 :                     saveLoad(&amp;num, board);</span>
+<span class="lineNum">     231 </span><span class="lineNoCov">          0 :                     if(num == 0){</span>
+<span class="lineNum">     232 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     233 </span>            :                     }
+<span class="lineNum">     234 </span>            :                 }
+<span class="lineNum">     235 </span>            :             }
+<span class="lineNum">     236 </span>            :         }
+<span class="lineNum">     237 </span>            :     }
+<span class="lineNum">     238 </span><span class="lineCov">         84 :     undoRedoLimit(num,&amp;undoCounter,&amp;redoCounter);</span>
+<span class="lineNum">     239 </span><span class="lineCov">         84 :     undoRedo(&amp;x,board,num,undoCol,undoRow,&amp;k,&amp;l,&amp;z,redoCol,redoRow,&amp;q);</span>
+<span class="lineNum">     240 </span><span class="lineCov">         84 :     *score1=horizontalScore(board,x)+verticalScore(board,x)+diagonal(board,x)+diagonal1(board,x);</span>
+<span class="lineNum">     241 </span><span class="lineCov">         84 :     message(3,*score1, *score2,0);</span>
+<span class="lineNum">     242 </span><span class="lineCov">         84 :     switch(choose){</span>
+<span class="lineNum">     243 </span>            : 
+<span class="lineNum">     244 </span><span class="lineCov">         42 :         case 1:{</span>
+<span class="lineNum">     245 </span>            : 
+<span class="lineNum">     246 </span><span class="lineCov">         42 :             if(num != 0 &amp;&amp; num != -1 &amp;&amp; num != -2){</span>
+<span class="lineNum">     247 </span><span class="lineCov">         42 :                 Easy(board, &amp;num);</span>
+<span class="lineNum">     248 </span><span class="lineCov">         42 :                 compUndoCol[d++] = num-1 ;</span>
+<span class="lineNum">     249 </span><span class="lineCov">         42 :                 compUndoRow[c++] = rowNum(num,board)+1;</span>
+<span class="lineNum">     250 </span><span class="lineCov">         42 :                 compUndoCounter = 0;</span>
+<span class="lineNum">     251 </span>            :             }
+<span class="lineNum">     252 </span>            : 
+<span class="lineNum">     253 </span><span class="lineCov">         42 :             if(num == 0){</span>
+<span class="lineNum">     254 </span><span class="lineNoCov">          0 :                 compUndoCounter += 1;</span>
+<span class="lineNum">     255 </span><span class="lineNoCov">          0 :                 c--;</span>
+<span class="lineNum">     256 </span><span class="lineNoCov">          0 :                 d--;</span>
+<span class="lineNum">     257 </span><span class="lineNoCov">          0 :                 board[compUndoRow[c]][compUndoCol[d]] = blanc;</span>
+<span class="lineNum">     258 </span>            :             }
+<span class="lineNum">     259 </span><span class="lineCov">         42 :             break;</span>
+<span class="lineNum">     260 </span>            :         }
+<span class="lineNum">     261 </span>            : 
+<span class="lineNum">     262 </span><span class="lineCov">         21 :         case 2: {</span>
+<span class="lineNum">     263 </span>            : 
+<span class="lineNum">     264 </span><span class="lineCov">         21 :             if(num != 0 &amp;&amp; num != -1 &amp;&amp; num != -2){</span>
+<span class="lineNum">     265 </span><span class="lineCov">         21 :                  flag=0;</span>
+<span class="lineNum">     266 </span>            : 
+<span class="lineNum">     267 </span><span class="lineCov">         21 :                 if(Medium(board,x,&amp;num)==1){</span>
+<span class="lineNum">     268 </span><span class="lineCov">          1 :                     flag=1;</span>
+<span class="lineNum">     269 </span>            :                 }
+<span class="lineNum">     270 </span>            : 
+<span class="lineNum">     271 </span><span class="lineCov">         21 :                 if(flag!=1){</span>
+<span class="lineNum">     272 </span><span class="lineCov">         20 :                     Easy(board, &amp;num);</span>
+<span class="lineNum">     273 </span>            :                 }
+<span class="lineNum">     274 </span><span class="lineCov">         21 :                 compUndoCol[d++] = num-1 ;</span>
+<span class="lineNum">     275 </span><span class="lineCov">         21 :                 compUndoRow[c++] = rowNum(num,board)+1;</span>
+<span class="lineNum">     276 </span><span class="lineCov">         21 :                 compUndoCounter = 0;</span>
+<span class="lineNum">     277 </span>            :             }
+<span class="lineNum">     278 </span>            : 
+<span class="lineNum">     279 </span><span class="lineCov">         21 :             if(num == 0){</span>
+<span class="lineNum">     280 </span><span class="lineNoCov">          0 :                             compUndoCounter += 1;</span>
+<span class="lineNum">     281 </span><span class="lineNoCov">          0 :                  c--;</span>
+<span class="lineNum">     282 </span><span class="lineNoCov">          0 :                 d--;</span>
+<span class="lineNum">     283 </span><span class="lineNoCov">          0 :                 board[compUndoRow[c]][compUndoCol[d]] = blanc;</span>
+<span class="lineNum">     284 </span>            :             }
+<span class="lineNum">     285 </span><span class="lineCov">         21 :             break;</span>
+<span class="lineNum">     286 </span>            :         }
+<span class="lineNum">     287 </span>            : 
+<span class="lineNum">     288 </span><span class="lineCov">         21 :         case 3:{</span>
+<span class="lineNum">     289 </span>            : 
+<span class="lineNum">     290 </span><span class="lineCov">         21 :             if(num != 0 &amp;&amp; num != -1 &amp;&amp; num != -2){</span>
+<span class="lineNum">     291 </span><span class="lineCov">         21 :                 Hard(board,&amp;num);</span>
+<span class="lineNum">     292 </span><span class="lineCov">         21 :                 compUndoCol[d++] = num-1 ;</span>
+<span class="lineNum">     293 </span><span class="lineCov">         21 :                 compUndoRow[c++] = rowNum(num,board)+1;</span>
+<span class="lineNum">     294 </span><span class="lineCov">         21 :                 compUndoCounter = 0;</span>
+<span class="lineNum">     295 </span>            :             }
+<span class="lineNum">     296 </span>            : 
+<span class="lineNum">     297 </span><span class="lineCov">         21 :             if(num == 0){</span>
+<span class="lineNum">     298 </span><span class="lineNoCov">          0 :                 compUndoCounter += 1;</span>
+<span class="lineNum">     299 </span><span class="lineNoCov">          0 :                 c--;</span>
+<span class="lineNum">     300 </span><span class="lineNoCov">          0 :                 d--;</span>
+<span class="lineNum">     301 </span><span class="lineNoCov">          0 :                 board[compUndoRow[c]][compUndoCol[d]] = blanc;</span>
+<span class="lineNum">     302 </span>            :             }
+<span class="lineNum">     303 </span><span class="lineCov">         21 :             break;</span>
+<span class="lineNum">     304 </span>            :         }
+<span class="lineNum">     305 </span>            :     } 
+<span class="lineNum">     306 </span><span class="lineCov">         84 :     print(board);</span>
+<span class="lineNum">     307 </span><span class="lineCov">         84 :     *score2=horizontalScore(board,o)+verticalScore(board,o)+diagonal(board,o)+diagonal1(board,o);</span>
+<span class="lineNum">     308 </span><span class="lineCov">         84 :     message(4,*score1, *score2,0);</span>
+<span class="lineNum">     309 </span><span class="lineCov">         84 : }</span>
+<span class="lineNum">     310 </span>            : 
+<span class="lineNum">     311 </span>            : //*****************************************************************************
+<span class="lineNum">     312 </span>            : //
+<span class="lineNum">     313 </span>            : //! \file mode.c(DisplayMode).
+<span class="lineNum">     314 </span>            : //! \brief The defferent mode game 
+<span class="lineNum">     315 </span>            : //!
+<span class="lineNum">     316 </span>            : //! \param Game board.
+<span class="lineNum">     317 </span>            : //! \param The row table for undo.
+<span class="lineNum">     318 </span>            : //! \param The row table for redo.
+<span class="lineNum">     319 </span>            : //! \param The column table for undo.
+<span class="lineNum">     320 </span>            : //! \param The column table for redo.
+<span class="lineNum">     321 </span>            : //! \param The first player's score.
+<span class="lineNum">     322 </span>            : //! \param The score of the second player.
+<span class="lineNum">     323 </span>            : //! \param
+<span class="lineNum">     324 </span>            : //! \param
+<span class="lineNum">     325 </span>            : //!
+<a name="326"><span class="lineNum">     326 </span>            : //*****************************************************************************</a>
+<span class="lineNum">     327 </span>            : 
+<span class="lineNum">     328 </span><span class="lineCov">          6 : void DisplayMode(int high,int score1,int score2,int *compUndoCol,int undoCounter,int redoCounter,</span>
+<span class="lineNum">     329 </span>            :                     int compUndoCounter,int num, int *undoCol,int *undoRow,int *redoCol,
+<span class="lineNum">     330 </span>            :                     int *redoRow,int *compUndoRow, int q,int z,int d,int c, char **board){
+<span class="lineNum">     331 </span>            :     int choose;
+<span class="lineNum">     332 </span><span class="lineCov">          6 :     message(0,0,0,0);</span>
+<span class="lineNum">     333 </span><span class="lineCov">          6 :     scanf(&quot;%d&quot;, &amp;choose);</span>
+<span class="lineNum">     334 </span><span class="lineCov">         12 :     while((choose!=1 &amp;&amp; choose!=2) || isalpha(choose))</span>
+<span class="lineNum">     335 </span>            :     {
+<span class="lineNum">     336 </span><span class="lineNoCov">          0 :         printf(&quot;Enter 1 or 2\n&quot;);</span>
+<span class="lineNum">     337 </span><span class="lineNoCov">          0 :         printf(&quot;Player1 vs Player2: press 1 \n\nPlayer vs Computer: press 2 \n\n&quot;);</span>
+<span class="lineNum">     338 </span><span class="lineNoCov">          0 :         scanf(&quot;%d&quot;, &amp;choose);</span>
+<span class="lineNum">     339 </span>            :     }
+<span class="lineNum">     340 </span>            : 
+<span class="lineNum">     341 </span><span class="lineCov">          6 :     if(choose == 1){</span>
+<span class="lineNum">     342 </span><span class="lineCov">          2 :         print(board);</span>
+<span class="lineNum">     343 </span>            :         do {
+<span class="lineNum">     344 </span><span class="lineCov">         43 :             message(7,0,0,0);</span>
+<span class="lineNum">     345 </span><span class="lineCov">         43 :             if(numX(board) &lt;= numO(board)){</span>
+<span class="lineNum">     346 </span><span class="lineCov">         43 :                 ModeOne(&amp;score1,&amp;score2,num,redoCounter,undoCounter,undoCol,undoRow,redoCol,</span>
+<span class="lineNum">     347 </span>            :                             redoRow,z,q,board);
+<span class="lineNum">     348 </span>            :             }
+<span class="lineNum">     349 </span>            : 
+<span class="lineNum">     350 </span><span class="lineCov">         43 :             if(numO(board) &lt; numX(board)){</span>
+<span class="lineNum">     351 </span><span class="lineNoCov">          0 :                 ModeOne(&amp;score1,&amp;score2,num,redoCounter,undoCounter,undoCol,undoRow,redoCol,</span>
+<span class="lineNum">     352 </span>            :                           redoRow,z,q,board);
+<span class="lineNum">     353 </span>            :             }           
+<span class="lineNum">     354 </span><span class="lineCov">         43 :         }while(checkfull(board));</span>
+<span class="lineNum">     355 </span><span class="lineCov">          2 :         message(6,score1,score2,&amp;high);</span>
+<span class="lineNum">     356 </span>            :     }
+<span class="lineNum">     357 </span>            :     else{
+<span class="lineNum">     358 </span><span class="lineCov">          4 :         printf(&quot;\nEasy (press 1), Medium (press 2), Hard (press 3)\n&quot;);</span>
+<span class="lineNum">     359 </span><span class="lineCov">          4 :         scanf(&quot;%d&quot;, &amp;choose);</span>
+<span class="lineNum">     360 </span>            : 
+<span class="lineNum">     361 </span><span class="lineCov">          8 :         while(choose!=1 &amp;&amp; choose!=2 &amp;&amp; choose!=3){</span>
+<span class="lineNum">     362 </span><span class="lineNoCov">          0 :             printf(&quot;Enter 1 , 2 or 3\n&quot;);</span>
+<span class="lineNum">     363 </span><span class="lineNoCov">          0 :             printf(&quot;\nEasy (press 1), Medium (press 2), Hard (press 3)\n&quot;);</span>
+<span class="lineNum">     364 </span><span class="lineNoCov">          0 :             scanf(&quot;%d&quot;, &amp;choose);</span>
+<span class="lineNum">     365 </span>            :         }
+<span class="lineNum">     366 </span><span class="lineCov">          4 :         print(board);</span>
+<span class="lineNum">     367 </span>            : 
+<span class="lineNum">     368 </span>            :         do{
+<span class="lineNum">     369 </span><span class="lineCov">         84 :             message(7,0,0,0);</span>
+<span class="lineNum">     370 </span><span class="lineCov">         84 :             printf(&quot;\nenter number of the column:&quot;);</span>
+<span class="lineNum">     371 </span><span class="lineCov">         84 :             scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">     372 </span><span class="lineCov">         84 :             saveLoad(&amp;num, board);</span>
+<span class="lineNum">     373 </span><span class="lineCov">         84 :             num = checknum(num,board);</span>
+<span class="lineNum">     374 </span>            : 
+<span class="lineNum">     375 </span><span class="lineCov">         84 :             if(checkCol(num,board)){</span>
+<span class="lineNum">     376 </span><span class="lineCov">         12 :                 while(board[0][num-1]!=blanc){</span>
+<span class="lineNum">     377 </span><span class="lineCov">          4 :                     print(board);</span>
+<span class="lineNum">     378 </span><span class="lineCov">          4 :                     printf(&quot;Invalid input. Do another move : &quot;);</span>
+<span class="lineNum">     379 </span><span class="lineCov">          4 :                     scanf(&quot;%d&quot;, &amp;num);</span>
+<span class="lineNum">     380 </span><span class="lineCov">          4 :                     saveLoad(&amp;num, board);</span>
+<span class="lineNum">     381 </span><span class="lineCov">          4 :                     if(num == 0 || num == -3){</span>
+<span class="lineNum">     382 </span>            :                         break;
+<span class="lineNum">     383 </span>            :                     }
+<span class="lineNum">     384 </span>            :                 }
+<span class="lineNum">     385 </span>            :             }
+<span class="lineNum">     386 </span>            : 
+<span class="lineNum">     387 </span><span class="lineCov">         84 :             if(redoCounter &gt;= compUndoCounter){</span>
+<span class="lineNum">     388 </span><span class="lineCov">         84 :                 ModeTwo(&amp;score1,&amp;score2,choose,high,num,redoCounter,undoCounter,undoCol,undoRow,redoCol,</span>
+<span class="lineNum">     389 </span>            :                             redoRow,compUndoCol,compUndoRow,compUndoCounter,z,q,c,d,board);
+<span class="lineNum">     390 </span>            :             }
+<span class="lineNum">     391 </span><span class="lineCov">         84 :         }while(checkfull(board));    </span>
+<span class="lineNum">     392 </span><span class="lineCov">          4 :         message(5,score1,score2,&amp;high);</span>
+<span class="lineNum">     393 </span>            :     }
+<span class="lineNum">     394 </span><span class="lineCov">          6 :     highscore(high);</span>
+<span class="lineNum">     395 </span><span class="lineCov">          6 :     printf(&quot;\nif you  want to play again press y, else press any key\n&quot;);         </span>
+<span class="lineNum">     396 </span><span class="lineCov">          6 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
