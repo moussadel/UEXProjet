@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - rap.info - src/GameBoard.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - GameBoard.c<span style="font-size: 80%;"> (source / <a href="GameBoard.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">rap.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">79</td>
+            <td class="headerCovTableEntry">109</td>
+            <td class="headerCovTableEntryLo">72.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2019-02-08 11:54:02</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //*****************************************************************************</a>
+<span class="lineNum">       2 </span>            : //
+<span class="lineNum">       3 </span>            : //! \file GameBoaerd.c (rowNum).
+<span class="lineNum">       4 </span>            : //! \brief This function (rowNum) calculates the point obtained after the shot.
+<span class="lineNum">       5 </span>            : //!
+<span class="lineNum">       6 </span>            : //! \param  Game board.
+<span class="lineNum">       7 </span>            : //! \param  The variable that indicates the location.
+<span class="lineNum">       8 </span>            : //!
+<span class="lineNum">       9 </span>            : //! \return The point obtained after the shot. 
+<span class="lineNum">      10 </span>            : //!
+<span class="lineNum">      11 </span>            : //*****************************************************************************
+<span class="lineNum">      12 </span>            : 
+<span class="lineNum">      13 </span>            : #include &quot;appli.h&quot;
+<span class="lineNum">      14 </span>            : #include &lt;stdlib.h&gt;
+<a name="15"><span class="lineNum">      15 </span>            : #include &lt;stdio.h&gt;</a>
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span><span class="lineCov">        424 : int rowNum(int num, char **board){</span>
+<span class="lineNum">      18 </span><span class="lineCov">        424 :     int i=0;</span>
+<span class="lineNum">      19 </span><span class="lineCov">       1783 :     for(i=0;i&lt;height;i++){</span>
+<span class="lineNum">      20 </span><span class="lineCov">       1747 :         if(num == 0){return 0;}</span>
+<span class="lineNum">      21 </span><span class="lineCov">       1747 :         if(board[i][num-1]!=blanc){break;}</span>
+<span class="lineNum">      22 </span>            :     }
+<span class="lineNum">      23 </span><span class="lineCov">        424 :     return i-1;</span>
+<span class="lineNum">      24 </span>            : }
+<span class="lineNum">      25 </span>            : 
+<span class="lineNum">      26 </span>            : //*****************************************************************************
+<span class="lineNum">      27 </span>            : //
+<span class="lineNum">      28 </span>            : //! \file GameBoaerd.c (undoRedo).
+<span class="lineNum">      29 </span>            : //! \brief This function (undoRedo) undo redo the player input. 
+<span class="lineNum">      30 </span>            : //!
+<span class="lineNum">      31 </span>            : //! \param The number that indicates whether to back up or restore.
+<span class="lineNum">      32 </span>            : //! \param Game board.
+<span class="lineNum">      33 </span>            : //! \param The number of the case that wants to cancel.
+<span class="lineNum">      34 </span>            : //! \param The rew to be undo.
+<span class="lineNum">      35 </span>            : //! \param The rew to be redo.
+<span class="lineNum">      36 </span>            : //! \param The column to be undo. 
+<span class="lineNum">      37 </span>            : //! \param The column to be redo.
+<span class="lineNum">      38 </span>            : //!
+<a name="39"><span class="lineNum">      39 </span>            : //*****************************************************************************</a>
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span><span class="lineCov">        170 : void undoRedo(char *x, char **board, int num, int *undoCol,int *undoRow, int *k, int *l, int *z,</span>
+<span class="lineNum">      42 </span>            :                int *redoCol, int *redoRow, int *q){
+<span class="lineNum">      43 </span>            : 
+<span class="lineNum">      44 </span>            :         static int ccounter = 0, dcounter = 0;
+<span class="lineNum">      45 </span>            :         
+<span class="lineNum">      46 </span><span class="lineCov">        170 :         if(num != 0 &amp;&amp; !checkCol(num, board) &amp;&amp; num != -3 &amp;&amp; !(num&lt;-3) &amp;&amp; !(num&gt;width) &amp;&amp; !(num == -2)){</span>
+<span class="lineNum">      47 </span><span class="lineCov">        170 :             undoCol[*q] = num-1;</span>
+<span class="lineNum">      48 </span><span class="lineCov">        170 :             *k = rowNum(num, board);</span>
+<span class="lineNum">      49 </span><span class="lineCov">        170 :             undoRow[*q] = *k;</span>
+<span class="lineNum">      50 </span>            :         }
+<span class="lineNum">      51 </span><span class="lineCov">        170 :         if(num != 0 &amp;&amp; !checkCol(num, board) &amp;&amp; num != -3 &amp;&amp; !(num&lt;-3) &amp;&amp; !(num&gt;width) &amp;&amp; !(num == -2)){</span>
+<span class="lineNum">      52 </span><span class="lineCov">        170 :             redoCol[*z] = num-1;</span>
+<span class="lineNum">      53 </span><span class="lineCov">        170 :             *l = rowNum(num, board);</span>
+<span class="lineNum">      54 </span><span class="lineCov">        170 :             redoRow[*z] = *l;</span>
+<span class="lineNum">      55 </span><span class="lineCov">        170 :             *z+=1;</span>
+<span class="lineNum">      56 </span>            :         }
+<span class="lineNum">      57 </span><span class="lineCov">        170 :         if(num == 0){</span>
+<span class="lineNum">      58 </span><span class="lineNoCov">          0 :             ccounter +=1;</span>
+<span class="lineNum">      59 </span><span class="lineNoCov">          0 :             board[undoRow[(*q-1)]][undoCol[(*q-1)]] = blanc;</span>
+<span class="lineNum">      60 </span><span class="lineNoCov">          0 :             print(board);</span>
+<span class="lineNum">      61 </span><span class="lineNoCov">          0 :             *q-=1;</span>
+<span class="lineNum">      62 </span><span class="lineNoCov">          0 :             *z-=1;</span>
+<span class="lineNum">      63 </span>            :         }
+<span class="lineNum">      64 </span><span class="lineCov">        170 :         else if(num == -3){</span>
+<span class="lineNum">      65 </span><span class="lineNoCov">          0 :             dcounter += 1;</span>
+<span class="lineNum">      66 </span><span class="lineNoCov">          0 :             if((dcounter &lt;= ccounter)){</span>
+<span class="lineNum">      67 </span><span class="lineNoCov">          0 :                 board[redoRow[*z]][redoCol[*z]] = *x;</span>
+<span class="lineNum">      68 </span><span class="lineNoCov">          0 :                 print(board);</span>
+<span class="lineNum">      69 </span><span class="lineNoCov">          0 :                 *q+=1;</span>
+<span class="lineNum">      70 </span><span class="lineNoCov">          0 :                 undoCol[*q] = redoCol[*z+1];</span>
+<span class="lineNum">      71 </span><span class="lineNoCov">          0 :                 undoRow[*q] = redoRow[*z+1];</span>
+<span class="lineNum">      72 </span><span class="lineNoCov">          0 :                 *z+=1;</span>
+<span class="lineNum">      73 </span>            :             }
+<span class="lineNum">      74 </span>            :         }
+<span class="lineNum">      75 </span><span class="lineCov">        170 :         else if(num == -1){</span>
+<span class="lineNum">      76 </span><span class="lineNoCov">          0 :             printf(&quot;Game Loaded Successfully&quot;);</span>
+<span class="lineNum">      77 </span>            :         }
+<span class="lineNum">      78 </span><span class="lineCov">        170 :         else if(num == -2){</span>
+<span class="lineNum">      79 </span><span class="lineNoCov">          0 :             printf(&quot;Game saved Successfully&quot;);</span>
+<span class="lineNum">      80 </span><span class="lineNoCov">          0 :             print(board);</span>
+<span class="lineNum">      81 </span>            :         }
+<span class="lineNum">      82 </span>            :         else{
+<span class="lineNum">      83 </span><span class="lineCov">        170 :             *q+=1;</span>
+<span class="lineNum">      84 </span><span class="lineCov">        170 :             player(board,num,*x);</span>
+<span class="lineNum">      85 </span><span class="lineCov">        170 :             ccounter = 0;</span>
+<span class="lineNum">      86 </span><span class="lineCov">        170 :             dcounter = 0;</span>
+<span class="lineNum">      87 </span>            :         }
+<span class="lineNum">      88 </span><span class="lineCov">        170 : }</span>
+<span class="lineNum">      89 </span>            : 
+<span class="lineNum">      90 </span>            : //*****************************************************************************
+<span class="lineNum">      91 </span>            : //
+<span class="lineNum">      92 </span>            : //! \file GameBoaerd.c (undoRedoLimit).
+<span class="lineNum">      93 </span>            : //! \brief This function (undoRedoLimit) calculates  limite undo redo the player input. 
+<span class="lineNum">      94 </span>            : //!
+<span class="lineNum">      95 </span>            : //! \param The variable which indicates if one must undo redo.
+<span class="lineNum">      96 </span>            : //! \param The variable that indicates the number of redo made.
+<span class="lineNum">      97 </span>            : //! \param The variable that indicates the number of undo made.
+<span class="lineNum">      98 </span>            : //!
+<a name="99"><span class="lineNum">      99 </span>            : //*****************************************************************************</a>
+<span class="lineNum">     100 </span>            : 
+<span class="lineNum">     101 </span><span class="lineCov">        170 : void undoRedoLimit(int num, int *undoCounter, int *redoCounter){</span>
+<span class="lineNum">     102 </span><span class="lineCov">        170 :     if(num == 0){</span>
+<span class="lineNum">     103 </span><span class="lineNoCov">          0 :         *undoCounter += 1;</span>
+<span class="lineNum">     104 </span>            :     }
+<span class="lineNum">     105 </span><span class="lineCov">        170 :     else if(num == -3){</span>
+<span class="lineNum">     106 </span><span class="lineNoCov">          0 :         *redoCounter += 1;</span>
+<span class="lineNum">     107 </span>            :     }
+<span class="lineNum">     108 </span>            :     else{
+<span class="lineNum">     109 </span><span class="lineCov">        170 :         *undoCounter = 0;</span>
+<span class="lineNum">     110 </span><span class="lineCov">        170 :         *redoCounter = 0;</span>
+<span class="lineNum">     111 </span>            :     }
+<span class="lineNum">     112 </span><span class="lineCov">        170 : }</span>
+<span class="lineNum">     113 </span>            : 
+<span class="lineNum">     114 </span>            : //*****************************************************************************
+<span class="lineNum">     115 </span>            : //
+<span class="lineNum">     116 </span>            : //! \file GameBoaerd.c (saveLoad).
+<span class="lineNum">     117 </span>            : //! \brief This function (saveLoad)save or restore the game.
+<span class="lineNum">     118 </span>            : //!
+<span class="lineNum">     119 </span>            : //! \param The variable that indicates whether to back up or restore.
+<span class="lineNum">     120 </span>            : //! \param Game board.
+<span class="lineNum">     121 </span>            : //!
+<a name="122"><span class="lineNum">     122 </span>            : //*****************************************************************************</a>
+<span class="lineNum">     123 </span>            : 
+<span class="lineNum">     124 </span><span class="lineCov">        194 : void saveLoad(int *num, char **board){</span>
+<span class="lineNum">     125 </span>            :     FILE *pfile;
+<span class="lineNum">     126 </span>            :     int r, t;
+<span class="lineNum">     127 </span><span class="lineCov">        194 :     if(*num == -2){</span>
+<span class="lineNum">     128 </span><span class="lineCov">          1 :         printf(&quot;Game Saved Successfully&quot;);</span>
+<span class="lineNum">     129 </span><span class="lineCov">          1 :         pfile = fopen(&quot;save.txt&quot;, &quot;w+&quot;);</span>
+<span class="lineNum">     130 </span><span class="lineCov">          7 :         for(r=height-1;r&gt;=0;r--){</span>
+<span class="lineNum">     131 </span><span class="lineCov">         48 :             for(t=width-1;t&gt;=0;t--){</span>
+<span class="lineNum">     132 </span><span class="lineCov">         42 :                 fprintf(pfile, &quot;%c&quot;, board[r][t]);</span>
+<span class="lineNum">     133 </span>            :             }
+<span class="lineNum">     134 </span>            :         }
+<span class="lineNum">     135 </span><span class="lineCov">          1 :         fclose(pfile);</span>
+<span class="lineNum">     136 </span>            :     }
+<span class="lineNum">     137 </span><span class="lineCov">        194 :     if(*num == -1){</span>
+<span class="lineNum">     138 </span><span class="lineCov">          2 :         pfile = fopen(&quot;save.txt&quot;, &quot;r&quot;);</span>
+<span class="lineNum">     139 </span><span class="lineCov">          2 :         if(pfile == NULL)</span>
+<span class="lineNum">     140 </span>            :         {
+<span class="lineNum">     141 </span><span class="lineCov">          1 :             printf(&quot;Aucune partie n'as été sauvegarder !! \n&quot;);</span>
+<span class="lineNum">     142 </span>            :         }
+<span class="lineNum">     143 </span>            :         else
+<span class="lineNum">     144 </span>            :         {
+<span class="lineNum">     145 </span><span class="lineCov">          7 :             for(r=height-1;r&gt;=0;r--){</span>
+<span class="lineNum">     146 </span><span class="lineCov">         48 :                 for(t=width-1;t&gt;=0;t--){</span>
+<span class="lineNum">     147 </span><span class="lineCov">         42 :                     fscanf(pfile, &quot;%c&quot;, &amp;board[r][t]);</span>
+<span class="lineNum">     148 </span>            :                 }
+<span class="lineNum">     149 </span>            :             }
+<span class="lineNum">     150 </span>            :             
+<span class="lineNum">     151 </span><span class="lineCov">          1 :             fclose(pfile);</span>
+<span class="lineNum">     152 </span><span class="lineCov">          1 :             print(board);</span>
+<span class="lineNum">     153 </span>            :         }
+<span class="lineNum">     154 </span>            :         
+<span class="lineNum">     155 </span>            :         
+<span class="lineNum">     156 </span>            :         
+<span class="lineNum">     157 </span>            :     }
+<span class="lineNum">     158 </span><span class="lineCov">        194 : }</span>
+<span class="lineNum">     159 </span>            : 
+<span class="lineNum">     160 </span>            : //*****************************************************************************
+<span class="lineNum">     161 </span>            : //
+<span class="lineNum">     162 </span>            : //! \file GameBoaerd.c (XMLformating).
+<span class="lineNum">     163 </span>            : //! \briefh This function (XMLformating) read the size from XML file.
+<span class="lineNum">     164 </span>            : //!
+<span class="lineNum">     165 </span>            : //! \param The file that contains the size of the game table.
+<span class="lineNum">     166 </span>            : //!
+<a name="167"><span class="lineNum">     167 </span>            : //*****************************************************************************</a>
+<span class="lineNum">     168 </span>            : 
+<span class="lineNum">     169 </span><span class="lineCov">          2 : void XMLformating(FILE* file)</span>
+<span class="lineNum">     170 </span>            : {
+<span class="lineNum">     171 </span>            :     char  c, c1, c2, c3, c4, c5, c6, c7, widthTag, heightTag, highscoresTag;
+<span class="lineNum">     172 </span><span class="lineCov">          2 :     int start=0, End=0, flag1=0, flag2=0, widthflag=0, heightflag=0, highscoresflag=0;</span>
+<span class="lineNum">     173 </span><span class="lineCov">          2 :     fscanf(file,&quot;&lt; Configurations %c&quot;, &amp;c);</span>
+<span class="lineNum">     174 </span><span class="lineCov">          2 :     if(c=='&gt;'){</span>
+<span class="lineNum">     175 </span><span class="lineCov">          2 :         flag1=1;</span>
+<span class="lineNum">     176 </span><span class="lineCov">          2 :         start=ftell(file);</span>
+<span class="lineNum">     177 </span>            :     }
+<span class="lineNum">     178 </span>            :     else{
+<span class="lineNum">     179 </span><span class="lineNoCov">          0 :         while(fscanf(file,&quot;%c&quot;, &amp;c1)!=EOF){</span>
+<span class="lineNum">     180 </span><span class="lineNoCov">          0 :             fscanf(file,&quot;&lt; Configurations %c&quot;, &amp;c2);</span>
+<span class="lineNum">     181 </span><span class="lineNoCov">          0 :             if(c2=='&gt;'){</span>
+<span class="lineNum">     182 </span><span class="lineNoCov">          0 :                 flag1=1;</span>
+<span class="lineNum">     183 </span><span class="lineNoCov">          0 :                 start=ftell(file);</span>
+<span class="lineNum">     184 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     185 </span>            :             }
+<span class="lineNum">     186 </span>            :         }
+<span class="lineNum">     187 </span>            :     }
+<span class="lineNum">     188 </span><span class="lineCov">        126 :     while(fscanf(file,&quot;%c&quot;, &amp;c3)!=EOF){</span>
+<span class="lineNum">     189 </span><span class="lineCov">        124 :         fscanf(file,&quot;&lt; / Configurations %c&quot;, &amp;c4);</span>
+<span class="lineNum">     190 </span><span class="lineCov">        124 :         if(c4=='&gt;'){</span>
+<span class="lineNum">     191 </span><span class="lineCov">          2 :             flag2=1;</span>
+<span class="lineNum">     192 </span><span class="lineCov">          2 :             End=ftell(file);</span>
+<span class="lineNum">     193 </span><span class="lineCov">          2 :             break;</span>
+<span class="lineNum">     194 </span>            :         }
+<span class="lineNum">     195 </span>            :     }
+<span class="lineNum">     196 </span><span class="lineCov">          2 :     if(flag1==1 &amp;&amp; flag2==1)</span>
+<span class="lineNum">     197 </span>            :     {
+<span class="lineNum">     198 </span><span class="lineCov">          2 :         fseek(file,start,SEEK_SET);</span>
+<span class="lineNum">     199 </span><span class="lineCov">          2 :         while(fscanf(file,&quot;%c&quot;, &amp;c5)!=EOF){</span>
+<span class="lineNum">     200 </span><span class="lineCov">         44 :             fscanf(file,&quot;&lt; Width &gt;%d &lt; / Width %c&quot;, &amp;width, &amp;widthTag);</span>
+<span class="lineNum">     201 </span><span class="lineCov">         44 :             if( (widthTag=='&gt;') &amp;&amp; (width&gt;=4) &amp;&amp; ftell(file)&lt;End ) {widthflag=1; break;}</span>
+<span class="lineNum">     202 </span>            :         }
+<span class="lineNum">     203 </span><span class="lineCov">          2 :         fseek(file,start,SEEK_SET);</span>
+<span class="lineNum">     204 </span><span class="lineCov">          2 :         while(fscanf(file,&quot;%c&quot;, &amp;c6)!=EOF){</span>
+<span class="lineNum">     205 </span><span class="lineCov">          6 :             fscanf(file,&quot;&lt; Height &gt;%d &lt; / Height %c&quot;, &amp;height, &amp;heightTag);</span>
+<span class="lineNum">     206 </span><span class="lineCov">          6 :             if( (heightTag=='&gt;') &amp;&amp; (height&gt;=4) &amp;&amp; ftell(file)&lt;End ) {heightflag=1; break;}</span>
+<span class="lineNum">     207 </span>            :         }
+<span class="lineNum">     208 </span><span class="lineCov">          2 :         fseek(file,start,SEEK_SET);</span>
+<span class="lineNum">     209 </span><span class="lineCov">          2 :         while(fscanf(file,&quot;%c&quot;, &amp;c7)!=EOF){</span>
+<span class="lineNum">     210 </span><span class="lineCov">         76 :             fscanf(file,&quot;&lt; Highscores &gt;%d &lt; / Highscores %c&quot;, &amp;highscores, &amp;highscoresTag);</span>
+<span class="lineNum">     211 </span><span class="lineCov">         76 :             if( (highscoresTag=='&gt;') &amp;&amp; (highscores&gt;=4) &amp;&amp; ftell(file)&lt;End ) {highscoresflag=1; break;}</span>
+<span class="lineNum">     212 </span>            :         }
+<span class="lineNum">     213 </span>            :     }
+<span class="lineNum">     214 </span><span class="lineCov">          2 :     if(width==0 || widthflag==0){</span>
+<span class="lineNum">     215 </span><span class="lineNoCov">          0 :         width=7;</span>
+<span class="lineNum">     216 </span><span class="lineNoCov">          0 :         printf(&quot;Incorrect file format, default value of width (7) is loaded\n&quot;);</span>
+<span class="lineNum">     217 </span>            :     }
+<span class="lineNum">     218 </span><span class="lineCov">          2 :     if(height==0 || heightflag==0){</span>
+<span class="lineNum">     219 </span><span class="lineNoCov">          0 :         height=6;</span>
+<span class="lineNum">     220 </span><span class="lineNoCov">          0 :         printf(&quot;Incorrect file format, default value of height (6) is loaded\n&quot;);</span>
+<span class="lineNum">     221 </span>            :     }
+<span class="lineNum">     222 </span><span class="lineCov">          2 :     if(highscores==0 || highscoresflag==0){</span>
+<span class="lineNum">     223 </span><span class="lineNoCov">          0 :         highscores=5;</span>
+<span class="lineNum">     224 </span><span class="lineNoCov">          0 :         printf(&quot;Incorrect file format, default value of highscore list (5) is loaded\n&quot;);</span>
+<span class="lineNum">     225 </span>            :     }
+<span class="lineNum">     226 </span><span class="lineCov">          2 :     fclose(file);</span>
+<span class="lineNum">     227 </span><span class="lineCov">          2 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

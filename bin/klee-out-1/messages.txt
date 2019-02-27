@@ -1,0 +1,3 @@
+KLEE: Using STP solver backend
+KLEE: ERROR: /home/m/moussa/L3/UEX/Projet/UEXProjet/src/Mode.c:332: failed external call: message
+KLEE: NOTE: now ignoring this error at this location

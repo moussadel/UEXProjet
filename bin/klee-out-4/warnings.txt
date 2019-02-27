@@ -1,0 +1,29 @@
+KLEE: WARNING: undefined reference to function: __ctype_b_loc
+KLEE: WARNING: undefined reference to function: __isoc99_fscanf
+KLEE: WARNING: undefined reference to function: __isoc99_scanf
+KLEE: WARNING: undefined reference to function: _setjmp
+KLEE: WARNING: undefined reference to function: fabs
+KLEE: WARNING: undefined reference to function: fclose
+KLEE: WARNING: undefined reference to function: fopen
+KLEE: WARNING: undefined reference to function: fprintf
+KLEE: WARNING: undefined reference to function: fseek
+KLEE: WARNING: undefined reference to function: ftell
+KLEE: WARNING: undefined reference to function: longjmp
+KLEE: WARNING: undefined reference to function: perror
+KLEE: WARNING: undefined reference to function: printf
+KLEE: WARNING: undefined reference to function: rand
+KLEE: WARNING: undefined reference to function: sprintf
+KLEE: WARNING: undefined reference to function: strcat
+KLEE: WARNING: undefined reference to function: strcmp
+KLEE: WARNING: undefined reference to function: strcpy
+KLEE: WARNING: undefined reference to function: strlen
+KLEE: WARNING: undefined reference to function: vsprintf
+KLEE: WARNING ONCE: calling external: fopen(56854720, 56867944) at /home/m/moussa/L3/UEX/Projet/UEXProjet/src/appli.c:27
+KLEE: WARNING ONCE: calling external: __isoc99_fscanf(56558144, 56963488, 56868608) at /home/m/moussa/L3/UEX/Projet/UEXProjet/src/GameBoard.c:174
+KLEE: WARNING ONCE: calling external: ftell(56558144) at /home/m/moussa/L3/UEX/Projet/UEXProjet/src/GameBoard.c:176
+KLEE: WARNING ONCE: calling external: fseek(56558144, 16, 0) at /home/m/moussa/L3/UEX/Projet/UEXProjet/src/GameBoard.c:199
+KLEE: WARNING ONCE: calling external: fclose(56558144) at /home/m/moussa/L3/UEX/Projet/UEXProjet/src/GameBoard.c:227
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling external: printf(56894784) at /home/m/moussa/L3/UEX/Projet/UEXProjet/src/Messages.c:20
+KLEE: WARNING ONCE: calling external: __isoc99_scanf(56867928, 56868552) at /home/m/moussa/L3/UEX/Projet/UEXProjet/src/Mode.c:334
+KLEE: WARNING ONCE: calling external: __ctype_b_loc() at /home/m/moussa/L3/UEX/Projet/UEXProjet/src/Mode.c:334

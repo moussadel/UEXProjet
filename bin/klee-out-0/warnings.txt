@@ -1,0 +1,22 @@
+KLEE: WARNING: undefined reference to function: __ctype_b_loc
+KLEE: WARNING: undefined reference to function: __isoc99_fscanf
+KLEE: WARNING: undefined reference to function: __isoc99_scanf
+KLEE: WARNING: undefined reference to function: _setjmp
+KLEE: WARNING: undefined reference to function: fabs
+KLEE: WARNING: undefined reference to function: fclose
+KLEE: WARNING: undefined reference to function: fopen
+KLEE: WARNING: undefined reference to function: fprintf
+KLEE: WARNING: undefined reference to function: fseek
+KLEE: WARNING: undefined reference to function: ftell
+KLEE: WARNING: undefined reference to function: longjmp
+KLEE: WARNING: undefined reference to function: message
+KLEE: WARNING: undefined reference to function: perror
+KLEE: WARNING: undefined reference to function: printf
+KLEE: WARNING: undefined reference to function: rand
+KLEE: WARNING: undefined reference to function: sprintf
+KLEE: WARNING: undefined reference to function: strcat
+KLEE: WARNING: undefined reference to function: strcmp
+KLEE: WARNING: undefined reference to function: strcpy
+KLEE: WARNING: undefined reference to function: strlen
+KLEE: WARNING: undefined reference to function: vsprintf
+KLEE: WARNING ONCE: calling external: printf(66729952) at /home/m/moussa/L3/UEX/Projet/UEXProjet/src/appli.c:25

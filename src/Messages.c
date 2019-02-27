@@ -11,6 +11,14 @@
 //*****************************************************************************	
 
 #include <stdio.h>
+#include <klee/klee.h>
+
+void ReadChar(char *x,const char *p){
+    klee_make_symbolic(x,sizeof(char),p);
+}
+void ReadInt(int *x,const char *p){
+    klee_make_symbolic(x,sizeof(int),p);
+}
 
 void message(int P,int score1,int score2,int *high){
 

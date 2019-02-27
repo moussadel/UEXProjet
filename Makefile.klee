@@ -1,0 +1,27 @@
+CC=clang
+CFLAGS=-Wall -Werror=implicit -g -IHeader -ILibMessages/Header -I $(KLEE)/include -fprofile-arcs -ftest-coverage
+LDFLAGS=-L LibMessages/lib -lMessages
+ifdef L
+CPPFLAGS=-DL=$(L)
+endif
+ifdef C
+CPPFLAGS=-DC=$(C)
+endif
+
+SRCS=$(wildcard src/*.c)
+
+OBJS=$(SRCS:.c=.o)
+EXEC=bin/appli
+DOXYGENDIR = Doxygen
+
+all:$(EXEC)
+
+doxygen:
+	doxygen ./Doxyfile
+
+$(EXEC): $(OBJS)
+	$(CC) -fprofile-arcs -ftest-coverage $(OBJS) -o $(EXEC) $(LDFLAGS)
+
+.PHONY:clean,doxygen
+clean:
+	-rm -rf $(OBJS) $(EXEC) $(DOXYGENDIR) src/*.gdca  src/*.gcno

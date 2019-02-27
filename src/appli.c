@@ -2,22 +2,23 @@
 //
 //! \file appli.c(main)
 //! \brief The main program.
-//!  This function is the main program that allows you to allocate memory, 
+//!  This function is the main program that allows you to allocate memory,
 //!     initialize variables and start the game.
 //!
 //! \param argc the number of arguments to pass in parameter.
 //! \param argv * [] the name of the file containing the dimensions of the game table.
 //!
-//! \return the function termination code.      
+//! \return the function termination code.
 //!
 //*****************************************************************************
 
 #include "appli.h"
+#include "Messages.h"
 
 int main(int argc,char* argv[])
 {
     int high=0;
-    
+
     FILE *file;
     if(argc==1){
         printf("Donner un argument\n");

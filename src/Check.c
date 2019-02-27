@@ -19,7 +19,7 @@ int checknum(int num, char **board)
     {
         print(board);
         printf("\nPlease enter a number between 1 and %d :", width);
-        scanf("%d", &num);
+        ReadInt(&num,"je lis le numero du choix de mode");
     }
     return num;
 }
@@ -105,6 +105,5 @@ int checkCol(int num, char **board){
 int checkEmpty1(char **board,int num,int numOfrow)
 {
     if(numOfrow==(height-1) && board[numOfrow][num]==blanc){return 1;}
-    else if(board[numOfrow+1][num]!=blanc && board[numOfrow][num]==blanc){return 1;}
     return 0;
 }

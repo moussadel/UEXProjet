@@ -57,7 +57,7 @@ void print(char **board)
 void ModeOne(int *score1,int *score2,int num,int redoCounter,int undoCounter,int *undoCol,
                 int *undoRow, int *redoCol,int *redoRow,int z,int q,char **board){
 
-    int k,l; 
+    int k,l;
     char x='X',o='O';
 
     if(numX(board) <= numO(board)){
@@ -183,7 +183,7 @@ void ModeOne(int *score1,int *score2,int num,int redoCounter,int undoCounter,int
         *score2=horizontalScore(board,o)+verticalScore(board,o)+diagonal(board,o)+diagonal1(board,o);
         message(2,*score1,*score2,0);
     }
-} 
+}
 
 //*****************************************************************************
 //
@@ -204,7 +204,7 @@ void ModeTwo(int *score1,int *score2,int choose,int high,int num,int redoCounter
                 int *undoCol,int *undoRow,int *redoCol,int *redoRow,int *compUndoCol,int *compUndoRow,
                 int compUndoCounter,int z,int q,int c,int d,char **board){
 
-    int k,l,flag; 
+    int k,l,flag;
     char x='X',o='O';
 
     while(num == -3){
@@ -215,7 +215,7 @@ void ModeTwo(int *score1,int *score2,int choose,int high,int num,int redoCounter
         if(num == 0){
             break;
         }
-    }                
+    }
     while(num == 0 && checkEmpty(board)){
         print(board);
         printf("\ncannot undo! play again");
@@ -302,7 +302,7 @@ void ModeTwo(int *score1,int *score2,int choose,int high,int num,int redoCounter
             }
             break;
         }
-    } 
+    }
     print(board);
     *score2=horizontalScore(board,o)+verticalScore(board,o)+diagonal(board,o)+diagonal1(board,o);
     message(4,*score1, *score2,0);
@@ -311,7 +311,7 @@ void ModeTwo(int *score1,int *score2,int choose,int high,int num,int redoCounter
 //*****************************************************************************
 //
 //! \file mode.c(DisplayMode).
-//! \brief The defferent mode game 
+//! \brief The defferent mode game
 //!
 //! \param Game board.
 //! \param The row table for undo.
@@ -350,7 +350,7 @@ void DisplayMode(int high,int score1,int score2,int *compUndoCol,int undoCounter
             if(numO(board) < numX(board)){
                 ModeOne(&score1,&score2,num,redoCounter,undoCounter,undoCol,undoRow,redoCol,
                           redoRow,z,q,board);
-            }           
+            }
         }while(checkfull(board));
         message(6,score1,score2,&high);
     }
@@ -388,9 +388,9 @@ void DisplayMode(int high,int score1,int score2,int *compUndoCol,int undoCounter
                 ModeTwo(&score1,&score2,choose,high,num,redoCounter,undoCounter,undoCol,undoRow,redoCol,
                             redoRow,compUndoCol,compUndoRow,compUndoCounter,z,q,c,d,board);
             }
-        }while(checkfull(board));    
+        }while(checkfull(board));
         message(5,score1,score2,&high);
     }
     highscore(high);
-    printf("\nif you  want to play again press y, else press any key\n");         
+    printf("\nif you  want to play again press y, else press any key\n");
 }

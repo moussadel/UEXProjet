@@ -1,0 +1,477 @@
+        -:    0:Source:src/CuTest.c
+        -:    0:Programs:1
+        -:    1:#include <assert.h>
+        -:    2:#include <setjmp.h>
+        -:    3:#include <stdlib.h>
+        -:    4:#include <stdio.h>
+        -:    5:#include <string.h>
+        -:    6:#include <math.h>
+        -:    7:
+        -:    8:#include "CuTest.h"
+        -:    9:
+        -:   10:/*-------------------------------------------------------------------------*
+        -:   11: * CuStr
+        -:   12: *-------------------------------------------------------------------------*/
+        -:   13:
+function CuStrAlloc called 0 returned 0% blocks executed 0%
+    #####:   14:char* CuStrAlloc(int size)
+        -:   15:{
+    #####:   16:	char* newStr = (char*) malloc( sizeof(char) * (size) );
+    #####:   17:	return newStr;
+        -:   18:}
+        -:   19:
+function CuStrCopy called 0 returned 0% blocks executed 0%
+    #####:   20:char* CuStrCopy(const char* old)
+        -:   21:{
+    #####:   22:	int len = strlen(old);
+    #####:   23:	char* newStr = CuStrAlloc(len + 1);
+call    0 never executed
+    #####:   24:	strcpy(newStr, old);
+    #####:   25:	return newStr;
+        -:   26:}
+        -:   27:
+        -:   28:/*-------------------------------------------------------------------------*
+        -:   29: * CuString
+        -:   30: *-------------------------------------------------------------------------*/
+        -:   31:
+function CuStringInit called 0 returned 0% blocks executed 0%
+    #####:   32:void CuStringInit(CuString* str)
+        -:   33:{
+    #####:   34:	str->length = 0;
+    #####:   35:	str->size = STRING_MAX;
+    #####:   36:	str->buffer = (char*) malloc(sizeof(char) * str->size);
+    #####:   37:	str->buffer[0] = '\0';
+    #####:   38:}
+        -:   39:
+function CuStringNew called 0 returned 0% blocks executed 0%
+    #####:   40:CuString* CuStringNew(void)
+        -:   41:{
+    #####:   42:	CuString* str = (CuString*) malloc(sizeof(CuString));
+    #####:   43:	str->length = 0;
+    #####:   44:	str->size = STRING_MAX;
+    #####:   45:	str->buffer = (char*) malloc(sizeof(char) * str->size);
+    #####:   46:	str->buffer[0] = '\0';
+    #####:   47:	return str;
+        -:   48:}
+        -:   49:
+function CuStringDelete called 0 returned 0% blocks executed 0%
+    #####:   50:void CuStringDelete(CuString *str)
+        -:   51:{
+    #####:   52:        if (!str) return;
+branch  0 never executed
+branch  1 never executed
+    #####:   53:        free(str->buffer);
+    #####:   54:        free(str);
+        -:   55:}
+        -:   56:
+function CuStringResize called 0 returned 0% blocks executed 0%
+    #####:   57:void CuStringResize(CuString* str, int newSize)
+        -:   58:{
+    #####:   59:	str->buffer = (char*) realloc(str->buffer, sizeof(char) * newSize);
+    #####:   60:	str->size = newSize;
+    #####:   61:}
+        -:   62:
+function CuStringAppend called 0 returned 0% blocks executed 0%
+    #####:   63:void CuStringAppend(CuString* str, const char* text)
+        -:   64:{
+        -:   65:	int length;
+        -:   66:
+    #####:   67:	if (text == NULL) {
+branch  0 never executed
+branch  1 never executed
+    #####:   68:		text = "NULL";
+        -:   69:	}
+        -:   70:
+    #####:   71:	length = strlen(text);
+    #####:   72:	if (str->length + length + 1 >= str->size)
+branch  0 never executed
+branch  1 never executed
+    #####:   73:		CuStringResize(str, str->length + length + 1 + STRING_INC);
+call    0 never executed
+    #####:   74:	str->length += length;
+    #####:   75:	strcat(str->buffer, text);
+    #####:   76:}
+        -:   77:
+function CuStringAppendChar called 0 returned 0% blocks executed 0%
+    #####:   78:void CuStringAppendChar(CuString* str, char ch)
+        -:   79:{
+        -:   80:	char text[2];
+    #####:   81:	text[0] = ch;
+    #####:   82:	text[1] = '\0';
+    #####:   83:	CuStringAppend(str, text);
+call    0 never executed
+    #####:   84:}
+        -:   85:
+function CuStringAppendFormat called 0 returned 0% blocks executed 0%
+    #####:   86:void CuStringAppendFormat(CuString* str, const char* format, ...)
+        -:   87:{
+        -:   88:	va_list argp;
+        -:   89:	char buf[HUGE_STRING_LEN];
+    #####:   90:	va_start(argp, format);
+    #####:   91:	vsprintf(buf, format, argp);
+    #####:   92:	va_end(argp);
+    #####:   93:	CuStringAppend(str, buf);
+call    0 never executed
+    #####:   94:}
+        -:   95:
+function CuStringInsert called 0 returned 0% blocks executed 0%
+    #####:   96:void CuStringInsert(CuString* str, const char* text, int pos)
+        -:   97:{
+    #####:   98:	int length = strlen(text);
+    #####:   99:	if (pos > str->length)
+branch  0 never executed
+branch  1 never executed
+    #####:  100:		pos = str->length;
+    #####:  101:	if (str->length + length + 1 >= str->size)
+branch  0 never executed
+branch  1 never executed
+    #####:  102:		CuStringResize(str, str->length + length + 1 + STRING_INC);
+call    0 never executed
+    #####:  103:	memmove(str->buffer + pos + length, str->buffer + pos, (str->length - pos) + 1);
+    #####:  104:	str->length += length;
+    #####:  105:	memcpy(str->buffer + pos, text, length);
+    #####:  106:}
+        -:  107:
+        -:  108:/*-------------------------------------------------------------------------*
+        -:  109: * CuTest
+        -:  110: *-------------------------------------------------------------------------*/
+        -:  111:
+function CuTestInit called 0 returned 0% blocks executed 0%
+    #####:  112:void CuTestInit(CuTest* t, const char* name, TestFunction function)
+        -:  113:{
+    #####:  114:	t->name = CuStrCopy(name);
+call    0 never executed
+    #####:  115:	t->failed = 0;
+    #####:  116:	t->ran = 0;
+    #####:  117:	t->message = NULL;
+    #####:  118:	t->function = function;
+    #####:  119:	t->jumpBuf = NULL;
+    #####:  120:}
+        -:  121:
+function CuTestNew called 0 returned 0% blocks executed 0%
+    #####:  122:CuTest* CuTestNew(const char* name, TestFunction function)
+        -:  123:{
+    #####:  124:	CuTest* tc = CU_ALLOC(CuTest);
+    #####:  125:	CuTestInit(tc, name, function);
+call    0 never executed
+    #####:  126:	return tc;
+        -:  127:}
+        -:  128:
+function CuTestDelete called 0 returned 0% blocks executed 0%
+    #####:  129:void CuTestDelete(CuTest *t)
+        -:  130:{
+    #####:  131:        if (!t) return;
+branch  0 never executed
+branch  1 never executed
+    #####:  132:        free(t->name);
+    #####:  133:        free(t);
+        -:  134:}
+        -:  135:
+function CuTestRun called 0 returned 0% blocks executed 0%
+    #####:  136:void CuTestRun(CuTest* tc)
+        -:  137:{
+        -:  138:	jmp_buf buf;
+    #####:  139:	tc->jumpBuf = &buf;
+    #####:  140:	if (setjmp(buf) == 0)
+branch  0 never executed
+branch  1 never executed
+        -:  141:	{
+    #####:  142:		tc->ran = 1;
+    #####:  143:		(tc->function)(tc);
+call    0 never executed
+        -:  144:	}
+    #####:  145:	tc->jumpBuf = 0;
+    #####:  146:}
+        -:  147:
+function CuFailInternal called 0 returned 0% blocks executed 0%
+    #####:  148:static void CuFailInternal(CuTest* tc, const char* file, int line, CuString* string)
+        -:  149:{
+        -:  150:	char buf[HUGE_STRING_LEN];
+        -:  151:
+    #####:  152:	sprintf(buf, "%s:%d: ", file, line);
+    #####:  153:	CuStringInsert(string, buf, 0);
+call    0 never executed
+        -:  154:
+    #####:  155:	tc->failed = 1;
+    #####:  156:	tc->message = string->buffer;
+    #####:  157:	if (tc->jumpBuf != 0) longjmp(*(tc->jumpBuf), 0);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####:  158:}
+        -:  159:
+function CuFail_Line called 0 returned 0% blocks executed 0%
+    #####:  160:void CuFail_Line(CuTest* tc, const char* file, int line, const char* message2, const char* message)
+        -:  161:{
+        -:  162:	CuString string;
+        -:  163:
+    #####:  164:	CuStringInit(&string);
+call    0 never executed
+    #####:  165:	if (message2 != NULL) 
+branch  0 never executed
+branch  1 never executed
+        -:  166:	{
+    #####:  167:		CuStringAppend(&string, message2);
+call    0 never executed
+    #####:  168:		CuStringAppend(&string, ": ");
+call    0 never executed
+        -:  169:	}
+    #####:  170:	CuStringAppend(&string, message);
+call    0 never executed
+    #####:  171:	CuFailInternal(tc, file, line, &string);
+call    0 never executed
+    #####:  172:}
+        -:  173:
+function CuAssert_Line called 0 returned 0% blocks executed 0%
+    #####:  174:void CuAssert_Line(CuTest* tc, const char* file, int line, const char* message, int condition)
+        -:  175:{
+    #####:  176:	if (condition) return;
+branch  0 never executed
+branch  1 never executed
+    #####:  177:	CuFail_Line(tc, file, line, NULL, message);
+call    0 never executed
+        -:  178:}
+        -:  179:
+function CuAssertStrEquals_LineMsg called 0 returned 0% blocks executed 0%
+    #####:  180:void CuAssertStrEquals_LineMsg(CuTest* tc, const char* file, int line, const char* message, 
+        -:  181:	const char* expected, const char* actual)
+        -:  182:{
+        -:  183:	CuString string;
+    #####:  184:	if ((expected == NULL && actual == NULL) ||
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  185:	    (expected != NULL && actual != NULL &&
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  186:	     strcmp(expected, actual) == 0))
+        -:  187:	{
+    #####:  188:		return;
+        -:  189:	}
+        -:  190:
+    #####:  191:	CuStringInit(&string);
+call    0 never executed
+    #####:  192:	if (message != NULL) 
+branch  0 never executed
+branch  1 never executed
+        -:  193:	{
+    #####:  194:		CuStringAppend(&string, message);
+call    0 never executed
+    #####:  195:		CuStringAppend(&string, ": ");
+call    0 never executed
+        -:  196:	}
+    #####:  197:	CuStringAppend(&string, "expected <");
+call    0 never executed
+    #####:  198:	CuStringAppend(&string, expected);
+call    0 never executed
+    #####:  199:	CuStringAppend(&string, "> but was <");
+call    0 never executed
+    #####:  200:	CuStringAppend(&string, actual);
+call    0 never executed
+    #####:  201:	CuStringAppend(&string, ">");
+call    0 never executed
+    #####:  202:	CuFailInternal(tc, file, line, &string);
+call    0 never executed
+        -:  203:}
+        -:  204:
+function CuAssertIntEquals_LineMsg called 0 returned 0% blocks executed 0%
+    #####:  205:void CuAssertIntEquals_LineMsg(CuTest* tc, const char* file, int line, const char* message, 
+        -:  206:	int expected, int actual)
+        -:  207:{
+        -:  208:	char buf[STRING_MAX];
+    #####:  209:	if (expected == actual) return;
+branch  0 never executed
+branch  1 never executed
+    #####:  210:	sprintf(buf, "expected <%d> but was <%d>", expected, actual);
+    #####:  211:	CuFail_Line(tc, file, line, message, buf);
+call    0 never executed
+        -:  212:}
+        -:  213:
+function CuAssertDblEquals_LineMsg called 0 returned 0% blocks executed 0%
+    #####:  214:void CuAssertDblEquals_LineMsg(CuTest* tc, const char* file, int line, const char* message, 
+        -:  215:	double expected, double actual, double delta)
+        -:  216:{
+        -:  217:	char buf[STRING_MAX];
+    #####:  218:	if (fabs(expected - actual) <= delta) return;
+branch  0 never executed
+branch  1 never executed
+    #####:  219:	sprintf(buf, "expected <%f> but was <%f>", expected, actual); 
+        -:  220:
+    #####:  221:	CuFail_Line(tc, file, line, message, buf);
+call    0 never executed
+        -:  222:}
+        -:  223:
+function CuAssertPtrEquals_LineMsg called 0 returned 0% blocks executed 0%
+    #####:  224:void CuAssertPtrEquals_LineMsg(CuTest* tc, const char* file, int line, const char* message, 
+        -:  225:	void* expected, void* actual)
+        -:  226:{
+        -:  227:	char buf[STRING_MAX];
+    #####:  228:	if (expected == actual) return;
+branch  0 never executed
+branch  1 never executed
+    #####:  229:	sprintf(buf, "expected pointer <0x%p> but was <0x%p>", expected, actual);
+    #####:  230:	CuFail_Line(tc, file, line, message, buf);
+call    0 never executed
+        -:  231:}
+        -:  232:
+        -:  233:
+        -:  234:/*-------------------------------------------------------------------------*
+        -:  235: * CuSuite
+        -:  236: *-------------------------------------------------------------------------*/
+        -:  237:
+function CuSuiteInit called 0 returned 0% blocks executed 0%
+    #####:  238:void CuSuiteInit(CuSuite* testSuite)
+        -:  239:{
+    #####:  240:	testSuite->count = 0;
+    #####:  241:	testSuite->failCount = 0;
+    #####:  242:        memset(testSuite->list, 0, sizeof(testSuite->list));
+    #####:  243:}
+        -:  244:
+function CuSuiteNew called 0 returned 0% blocks executed 0%
+    #####:  245:CuSuite* CuSuiteNew(void)
+        -:  246:{
+    #####:  247:	CuSuite* testSuite = CU_ALLOC(CuSuite);
+    #####:  248:	CuSuiteInit(testSuite);
+call    0 never executed
+    #####:  249:	return testSuite;
+        -:  250:}
+        -:  251:
+function CuSuiteDelete called 0 returned 0% blocks executed 0%
+    #####:  252:void CuSuiteDelete(CuSuite *testSuite)
+        -:  253:{
+        -:  254:        unsigned int n;
+    #####:  255:        for (n=0; n < MAX_TEST_CASES; n++)
+branch  0 never executed
+branch  1 never executed
+        -:  256:        {
+    #####:  257:                if (testSuite->list[n])
+branch  0 never executed
+branch  1 never executed
+        -:  258:                {
+    #####:  259:                        CuTestDelete(testSuite->list[n]);
+call    0 never executed
+        -:  260:                }
+        -:  261:        }
+    #####:  262:        free(testSuite);
+        -:  263:
+    #####:  264:}
+        -:  265:
+function CuSuiteAdd called 0 returned 0% blocks executed 0%
+    #####:  266:void CuSuiteAdd(CuSuite* testSuite, CuTest *testCase)
+        -:  267:{
+    #####:  268:	assert(testSuite->count < MAX_TEST_CASES);
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+    #####:  269:	testSuite->list[testSuite->count] = testCase;
+    #####:  270:	testSuite->count++;
+    #####:  271:}
+        -:  272:
+function CuSuiteAddSuite called 0 returned 0% blocks executed 0%
+    #####:  273:void CuSuiteAddSuite(CuSuite* testSuite, CuSuite* testSuite2)
+        -:  274:{
+        -:  275:	int i;
+    #####:  276:	for (i = 0 ; i < testSuite2->count ; ++i)
+branch  0 never executed
+branch  1 never executed
+        -:  277:	{
+    #####:  278:		CuTest* testCase = testSuite2->list[i];
+    #####:  279:		CuSuiteAdd(testSuite, testCase);
+call    0 never executed
+        -:  280:	}
+    #####:  281:}
+        -:  282:
+function CuSuiteRun called 0 returned 0% blocks executed 0%
+    #####:  283:void CuSuiteRun(CuSuite* testSuite)
+        -:  284:{
+        -:  285:	int i;
+    #####:  286:	for (i = 0 ; i < testSuite->count ; ++i)
+branch  0 never executed
+branch  1 never executed
+        -:  287:	{
+    #####:  288:		CuTest* testCase = testSuite->list[i];
+    #####:  289:		CuTestRun(testCase);
+call    0 never executed
+    #####:  290:		if (testCase->failed) { testSuite->failCount += 1; }
+branch  0 never executed
+branch  1 never executed
+        -:  291:	}
+    #####:  292:}
+        -:  293:
+function CuSuiteSummary called 0 returned 0% blocks executed 0%
+    #####:  294:void CuSuiteSummary(CuSuite* testSuite, CuString* summary)
+        -:  295:{
+        -:  296:	int i;
+    #####:  297:	for (i = 0 ; i < testSuite->count ; ++i)
+branch  0 never executed
+branch  1 never executed
+        -:  298:	{
+    #####:  299:		CuTest* testCase = testSuite->list[i];
+    #####:  300:		CuStringAppend(summary, testCase->failed ? "F" : ".");
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+        -:  301:	}
+    #####:  302:	CuStringAppend(summary, "\n\n");
+call    0 never executed
+    #####:  303:}
+        -:  304:
+function CuSuiteDetails called 0 returned 0% blocks executed 0%
+    #####:  305:void CuSuiteDetails(CuSuite* testSuite, CuString* details)
+        -:  306:{
+        -:  307:	int i;
+    #####:  308:	int failCount = 0;
+        -:  309:
+    #####:  310:	if (testSuite->failCount == 0)
+branch  0 never executed
+branch  1 never executed
+        -:  311:	{
+    #####:  312:		int passCount = testSuite->count - testSuite->failCount;
+    #####:  313:		const char* testWord = passCount == 1 ? "test" : "tests";
+branch  0 never executed
+branch  1 never executed
+    #####:  314:		CuStringAppendFormat(details, "OK (%d %s)\n", passCount, testWord);
+call    0 never executed
+        -:  315:	}
+        -:  316:	else
+        -:  317:	{
+    #####:  318:		if (testSuite->failCount == 1)
+branch  0 never executed
+branch  1 never executed
+    #####:  319:			CuStringAppend(details, "There was 1 failure:\n");
+call    0 never executed
+        -:  320:		else
+    #####:  321:			CuStringAppendFormat(details, "There were %d failures:\n", testSuite->failCount);
+call    0 never executed
+        -:  322:
+    #####:  323:		for (i = 0 ; i < testSuite->count ; ++i)
+branch  0 never executed
+branch  1 never executed
+        -:  324:		{
+    #####:  325:			CuTest* testCase = testSuite->list[i];
+    #####:  326:			if (testCase->failed)
+branch  0 never executed
+branch  1 never executed
+        -:  327:			{
+    #####:  328:				failCount++;
+    #####:  329:				CuStringAppendFormat(details, "%d) %s: %s\n",
+call    0 never executed
+        -:  330:					failCount, testCase->name, testCase->message);
+        -:  331:			}
+        -:  332:		}
+    #####:  333:		CuStringAppend(details, "\n!!!FAILURES!!!\n");
+call    0 never executed
+        -:  334:
+    #####:  335:		CuStringAppendFormat(details, "Runs: %d ",   testSuite->count);
+call    0 never executed
+    #####:  336:		CuStringAppendFormat(details, "Passes: %d ", testSuite->count - testSuite->failCount);
+call    0 never executed
+    #####:  337:		CuStringAppendFormat(details, "Fails: %d\n",  testSuite->failCount);
+call    0 never executed
+        -:  338:	}
+    #####:  339:}
